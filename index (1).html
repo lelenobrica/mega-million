@@ -71,9 +71,158 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
         }
+        
+        .countdown-timer {
+            background: linear-gradient(145deg, #1f2937, #374151);
+            border: 2px solid #fbbf24;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+        
+        .countdown-number {
+            background: linear-gradient(145deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+        
+        .floating-animation {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .sparkle {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sparkle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: sparkle 3s infinite;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .money-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .money-drop {
+            position: absolute;
+            font-size: 24px;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .urgency-banner {
+            background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
+            animation: urgencyPulse 2s infinite;
+        }
+        
+        @keyframes urgencyPulse {
+            0%, 100% { background-size: 100% 100%; }
+            50% { background-size: 110% 110%; }
+        }
+        
+        .neon-glow {
+            text-shadow: 0 0 5px #fbbf24, 0 0 10px #fbbf24, 0 0 15px #fbbf24, 0 0 20px #fbbf24;
+            animation: neonFlicker 2s infinite alternate;
+        }
+        
+        @keyframes neonFlicker {
+            0%, 100% { text-shadow: 0 0 5px #fbbf24, 0 0 10px #fbbf24, 0 0 15px #fbbf24, 0 0 20px #fbbf24; }
+            50% { text-shadow: 0 0 2px #fbbf24, 0 0 5px #fbbf24, 0 0 8px #fbbf24, 0 0 12px #fbbf24; }
+        }
+        
+        .shake-animation {
+            animation: shake 0.5s infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .zoom-pulse {
+            animation: zoomPulse 3s infinite;
+        }
+        
+        @keyframes zoomPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b, #dc2626, #7c3aed);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .testimonial-update {
+            animation: slideInUp 0.5s ease-out;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-full">
+    <!-- Banner de Urgência -->
+    <div class="urgency-banner text-white py-2 text-center font-bold text-sm z-50 relative">
+        <div class="shake-animation inline-block">⚡ ÚLTIMAS HORAS!</div>
+        <span class="mx-2">•</span>
+        <span class="neon-glow">PRÊMIO ACUMULADO R$ 2,5 BILHÕES</span>
+        <span class="mx-2">•</span>
+        <div class="shake-animation inline-block">🔥 COMPRE AGORA!</div>
+    </div>
+
+    <!-- Chuva de Dinheiro -->
+    <div class="money-rain" id="money-rain"></div>
+
     <!-- Header -->
     <header class="gradient-bg text-white shadow-2xl sticky top-0 z-40">
         <div class="container mx-auto px-4 py-6">
@@ -97,53 +246,132 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="gradient-bg text-white py-24">
-        <div class="container mx-auto px-4 text-center">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-6xl font-bold mb-8">Prêmio Acumulado</h2>
-                <div class="gradient-gold text-black text-8xl font-bold mb-8 pulse-animation rounded-2xl py-6 px-8 inline-block shadow-2xl">
+    <section id="home" class="gradient-bg text-white py-24 relative overflow-hidden">
+        <!-- Partículas de fundo -->
+        <div class="absolute inset-0">
+            <div class="floating-animation absolute top-20 left-10 text-yellow-300 text-2xl">✨</div>
+            <div class="floating-animation absolute top-32 right-20 text-yellow-300 text-3xl" style="animation-delay: 1s;">💎</div>
+            <div class="floating-animation absolute bottom-40 left-20 text-yellow-300 text-2xl" style="animation-delay: 2s;">🌟</div>
+            <div class="floating-animation absolute bottom-20 right-10 text-yellow-300 text-3xl" style="animation-delay: 0.5s;">💰</div>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-6xl font-bold mb-8 sparkle gradient-text">🏆 PRÊMIO HISTÓRICO ACUMULADO! 🏆</h2>
+                <div class="gradient-gold text-black text-8xl font-bold mb-8 zoom-pulse rounded-2xl py-6 px-8 inline-block shadow-2xl sparkle neon-glow">
                     R$ 2.500.000.000
                 </div>
-                <p class="text-2xl mb-4">Próximo sorteio: Terça-feira às 23:00h</p>
-                <p class="text-lg text-blue-200 mb-12">Mais de 50.000 brasileiros já participam conosco</p>
-                <button onclick="scrollToPacotes()" class="gradient-gold text-black font-bold py-6 px-12 rounded-full text-2xl transition-all transform hover:scale-105 shadow-2xl">
-                    PARTICIPAR AGORA 🎯
+                <div class="text-2xl font-bold text-yellow-300 mb-4 shake-animation">
+                    💰 MAIOR PRÊMIO DA HISTÓRIA DO BRASIL! 💰
+                </div>
+                
+                <!-- Countdown Timer -->
+                <div class="countdown-timer rounded-2xl p-6 mb-8 max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-4 text-yellow-300">⏰ Próximo Sorteio em:</h3>
+                    <div class="grid grid-cols-4 gap-4 text-center">
+                        <div class="bg-gray-800 rounded-lg p-4">
+                            <div id="hours" class="countdown-number text-4xl font-bold">00</div>
+                            <div class="text-yellow-300 text-sm font-medium">HORAS</div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-4">
+                            <div id="minutes" class="countdown-number text-4xl font-bold">14</div>
+                            <div class="text-yellow-300 text-sm font-medium">MINUTOS</div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-4">
+                            <div id="seconds" class="countdown-number text-4xl font-bold">59</div>
+                            <div class="text-yellow-300 text-sm font-medium">SEGUNDOS</div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-4">
+                            <div id="milliseconds" class="countdown-number text-2xl font-bold">999</div>
+                            <div class="text-yellow-300 text-xs font-medium">MILISSEG</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-yellow-300 font-medium">
+                        🎲 Sorteio Automático • 🏆 Resultado Instantâneo
+                    </div>
+                </div>
+                
+                <p class="text-lg text-blue-200 mb-8">Mais de 50.000 brasileiros já participam conosco</p>
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <div class="bg-white bg-opacity-20 rounded-full px-6 py-2 text-sm font-medium">
+                        🔒 100% Seguro
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-full px-6 py-2 text-sm font-medium">
+                        ⚡ Resultado Instantâneo
+                    </div>
+                    <div class="bg-white bg-opacity-20 rounded-full px-6 py-2 text-sm font-medium">
+                        📧 Bilhetes por Email
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <div class="text-red-400 font-bold text-lg mb-2 shake-animation">⏰ TEMPO LIMITADO! ÚLTIMAS HORAS!</div>
+                </div>
+                <button onclick="scrollToPacotes()" class="gradient-gold text-black font-bold py-6 px-12 rounded-full text-2xl transition-all transform hover:scale-110 shadow-2xl glow-effect sparkle zoom-pulse neon-glow">
+                    🚀 GARANTIR MINHA SORTE AGORA! 🚀
                 </button>
+                <div class="mt-4 text-yellow-300 font-bold text-lg">
+                    👆 CLIQUE AQUI E MUDE SUA VIDA! 👆
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Como Jogar -->
-    <section id="como-jogar" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
+    <section id="como-jogar" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+        <!-- Elementos decorativos -->
+        <div class="absolute top-10 left-10 text-6xl text-blue-200 opacity-20">🎯</div>
+        <div class="absolute bottom-10 right-10 text-6xl text-yellow-200 opacity-20">🏆</div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold text-gray-800 mb-6">Como Participar</h2>
+                <h2 class="text-5xl font-bold text-gray-800 mb-6 sparkle">Como Participar</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">Processo simples e 100% seguro para participar da maior loteria do Brasil</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-yellow-500 mx-auto mt-4 rounded-full"></div>
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                <div class="text-center card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-lg">
-                    <div class="gradient-bg text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">1</div>
+                <div class="text-center card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-xl border border-blue-200 sparkle">
+                    <div class="gradient-bg text-white w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg glow-effect">1</div>
+                    <div class="text-4xl mb-4">📦</div>
                     <h3 class="text-xl font-bold mb-4 text-gray-800">Selecione seu Pacote</h3>
                     <p class="text-gray-600">Escolha entre nossos pacotes de bilhetes com diferentes quantidades e valores especiais</p>
                 </div>
                 
-                <div class="text-center card-hover bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg">
-                    <div class="bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">2</div>
+                <div class="text-center card-hover bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-xl border border-green-200 sparkle">
+                    <div class="bg-green-600 text-white w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg glow-effect">2</div>
+                    <div class="text-4xl mb-4">📝</div>
                     <h3 class="text-xl font-bold mb-4 text-gray-800">Preencha seus Dados</h3>
                     <p class="text-gray-600">Informe seu <strong>Nome Completo</strong>, <strong>CPF</strong>, <strong>Email</strong> e faça o pagamento via <strong>PIX</strong></p>
                 </div>
                 
-                <div class="text-center card-hover bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl shadow-lg">
-                    <div class="bg-yellow-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">3</div>
+                <div class="text-center card-hover bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl shadow-xl border border-yellow-200 sparkle">
+                    <div class="bg-yellow-600 text-white w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg glow-effect">3</div>
+                    <div class="text-4xl mb-4">📧</div>
                     <h3 class="text-xl font-bold mb-4 text-gray-800">Receba seus Bilhetes</h3>
                     <p class="text-gray-600">Enviaremos por <strong>email</strong> seu pack completo de bilhetes com todos os números</p>
                 </div>
                 
-                <div class="text-center card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl shadow-lg">
-                    <div class="bg-purple-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">4</div>
+                <div class="text-center card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl shadow-xl border border-purple-200 sparkle">
+                    <div class="bg-purple-600 text-white w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg glow-effect">4</div>
+                    <div class="text-4xl mb-4">🎉</div>
                     <h3 class="text-xl font-bold mb-4 text-gray-800">Aguarde o Resultado</h3>
                     <p class="text-gray-600">O sorteio é <strong>automático</strong>. Se você ganhar, te notificaremos por <strong>email</strong> imediatamente</p>
+                </div>
+            </div>
+            
+            <!-- Estatísticas -->
+            <div class="mt-16 grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="text-center bg-white p-6 rounded-2xl shadow-lg">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">50.000+</div>
+                    <div class="text-gray-600">Clientes Ativos</div>
+                </div>
+                <div class="text-center bg-white p-6 rounded-2xl shadow-lg">
+                    <div class="text-3xl font-bold text-green-600 mb-2">R$ 2.5Bi</div>
+                    <div class="text-gray-600">Em Prêmios</div>
+                </div>
+                <div class="text-center bg-white p-6 rounded-2xl shadow-lg">
+                    <div class="text-3xl font-bold text-yellow-600 mb-2">24/7</div>
+                    <div class="text-gray-600">Suporte Online</div>
                 </div>
             </div>
         </div>
@@ -580,6 +808,88 @@
         let valorSelecionado = 0;
         let quantidadeBilhetes = 0;
         let dadosCliente = {};
+        
+        // Sistema de Countdown
+        let countdownTime = 14 * 60 + 59; // 14:59 em segundos
+        let countdownInterval;
+        
+        // Depoimentos que serão atualizados
+        const depoimentosPool = [
+            {
+                inicial: 'M',
+                nome: 'Maria Silva',
+                cidade: 'São Paulo, SP',
+                texto: 'Comprei o pacote de 250 bilhetes e recomendo! O processo é super fácil e recebi tudo por email rapidinho. Já estou participando há 3 meses.',
+                pacote: '250 Bilhetes',
+                cor: 'blue'
+            },
+            {
+                inicial: 'J',
+                nome: 'João Santos',
+                cidade: 'Rio de Janeiro, RJ',
+                texto: 'Excelente! Comprei o pacote de 500 bilhetes e o atendimento é nota 10. Site confiável e pagamento super seguro via PIX. Recomendo demais!',
+                pacote: '500 Bilhetes',
+                cor: 'green'
+            },
+            {
+                inicial: 'A',
+                nome: 'Ana Costa',
+                cidade: 'Belo Horizonte, MG',
+                texto: 'Sempre compro o pacote de 1000 bilhetes. É o que tem melhor custo-benefício e aumenta muito as chances. Já indiquei para toda família!',
+                pacote: '1000 Bilhetes',
+                cor: 'purple'
+            },
+            {
+                inicial: 'C',
+                nome: 'Carlos Oliveira',
+                cidade: 'Porto Alegre, RS',
+                texto: 'Comecei com 100 bilhetes para testar e agora sempre compro 250. O site é muito profissional e o suporte responde rapidinho!',
+                pacote: '250 Bilhetes',
+                cor: 'red'
+            },
+            {
+                inicial: 'L',
+                nome: 'Lucia Ferreira',
+                cidade: 'Salvador, BA',
+                texto: 'Fantástico! Compro o pacote de 500 bilhetes todo mês. Processo simples, seguro e confiável. Recomendo para quem quer participar sério!',
+                pacote: '500 Bilhetes',
+                cor: 'yellow'
+            },
+            {
+                inicial: 'R',
+                nome: 'Roberto Lima',
+                cidade: 'Fortaleza, CE',
+                texto: 'Melhor investimento! Sempre compro 1000 bilhetes e já recomendei para mais de 20 pessoas. Site sério e pagamento instantâneo!',
+                pacote: '1000 Bilhetes',
+                cor: 'indigo'
+            },
+            {
+                inicial: 'P',
+                nome: 'Patricia Alves',
+                cidade: 'Brasília, DF',
+                texto: 'Acabei de comprar meu terceiro pacote de 250 bilhetes! A cada sorteio fico mais animada. Processo muito fácil e rápido.',
+                pacote: '250 Bilhetes',
+                cor: 'pink'
+            },
+            {
+                inicial: 'F',
+                nome: 'Fernando Costa',
+                cidade: 'Recife, PE',
+                texto: 'Comprei 500 bilhetes ontem e já recebi tudo por email. Agora é só aguardar o sorteio! Recomendo para todos os amigos.',
+                pacote: '500 Bilhetes',
+                cor: 'teal'
+            },
+            {
+                inicial: 'S',
+                nome: 'Sandra Martins',
+                cidade: 'Curitiba, PR',
+                texto: 'Incrível! Comprei o pacote de 1000 bilhetes e o atendimento foi excepcional. Já estou planejando comprar mais no próximo sorteio.',
+                pacote: '1000 Bilhetes',
+                cor: 'orange'
+            }
+        ];
+        
+        let depoimentosAtuais = [...depoimentosPool.slice(0, 6)];
 
         // Selecionar pacote de bilhetes
         function selecionarPacote(bilhetes, valor, elemento) {
@@ -678,6 +988,9 @@
             else if (quantidadeBilhetes === 500) bonus = ' + 25 bônus';
             else if (quantidadeBilhetes === 1000) bonus = ' + 100 bônus';
             
+            // Calcular tempo restante para o próximo sorteio
+            const tempoRestante = formatarTempoRestante();
+            
             bilheteInfo.innerHTML = `
                 <div class="space-y-3">
                     <div><strong>Cliente:</strong> ${dadosCliente.nome}</div>
@@ -686,7 +999,7 @@
                     <div><strong>Valor Pago:</strong> R$ ${valorSelecionado.toFixed(2).replace('.', ',')}</div>
                     <div><strong>Código da Compra:</strong> #${codigoCompra}</div>
                     <div class="text-sm text-gray-600 pt-2 border-t">
-                        <strong>Próximo Sorteio:</strong> Terça-feira às 23:00h
+                        <strong>Próximo Sorteio:</strong> <span id="proximo-sorteio-tempo">${tempoRestante}</span>
                     </div>
                 </div>
             `;
@@ -694,8 +1007,34 @@
             document.getElementById('modal-confirmacao').classList.remove('hidden');
             document.getElementById('modal-confirmacao').classList.add('flex');
             
+            // Atualizar o tempo no modal a cada segundo
+            const intervalModal = setInterval(() => {
+                const tempoAtualizado = formatarTempoRestante();
+                const elementoTempo = document.getElementById('proximo-sorteio-tempo');
+                if (elementoTempo) {
+                    elementoTempo.textContent = tempoAtualizado;
+                } else {
+                    clearInterval(intervalModal);
+                }
+            }, 1000);
+            
             // Resetar seleções
             resetarFormulario();
+        }
+        
+        // Função para formatar tempo restante
+        function formatarTempoRestante() {
+            const hours = Math.floor(countdownTime / 3600);
+            const minutes = Math.floor((countdownTime % 3600) / 60);
+            const seconds = countdownTime % 60;
+            
+            if (hours > 0) {
+                return `${hours}h ${minutes}min ${seconds}s`;
+            } else if (minutes > 0) {
+                return `${minutes}min ${seconds}s`;
+            } else {
+                return `${seconds}s`;
+            }
         }
 
         // Fechar modal PIX
@@ -758,10 +1097,189 @@
             e.target.value = value;
         });
 
+        // Função do Countdown
+        function iniciarCountdown() {
+            countdownInterval = setInterval(() => {
+                const hours = Math.floor(countdownTime / 3600);
+                const minutes = Math.floor((countdownTime % 3600) / 60);
+                const seconds = countdownTime % 60;
+                const milliseconds = Math.floor(Math.random() * 1000);
+                
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                document.getElementById('milliseconds').textContent = milliseconds.toString().padStart(3, '0');
+                
+                if (countdownTime <= 0) {
+                    realizarSorteio();
+                    countdownTime = 14 * 60 + 59; // Reiniciar para 14:59
+                } else {
+                    countdownTime--;
+                }
+            }, 100); // Atualiza a cada 100ms para efeito mais dinâmico
+        }
+        
+        // Função do Sorteio
+        function realizarSorteio() {
+            // Efeito visual do sorteio
+            const countdownTimer = document.querySelector('.countdown-timer');
+            countdownTimer.style.background = 'linear-gradient(145deg, #dc2626, #ef4444)';
+            countdownTimer.innerHTML = `
+                <div class="text-center">
+                    <div class="text-4xl mb-4">🎲</div>
+                    <div class="text-2xl font-bold text-white mb-2">SORTEIO EM ANDAMENTO!</div>
+                    <div class="text-yellow-300">Aguarde o resultado...</div>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                // Mostrar resultado do sorteio
+                const numerosGanhadores = [];
+                while (numerosGanhadores.length < 5) {
+                    const num = Math.floor(Math.random() * 70) + 1;
+                    if (!numerosGanhadores.includes(num)) {
+                        numerosGanhadores.push(num);
+                    }
+                }
+                const megaBall = Math.floor(Math.random() * 25) + 1;
+                numerosGanhadores.sort((a, b) => a - b);
+                
+                countdownTimer.style.background = 'linear-gradient(145deg, #059669, #10b981)';
+                countdownTimer.innerHTML = `
+                    <div class="text-center">
+                        <div class="text-3xl mb-4">🏆 RESULTADO DO SORTEIO</div>
+                        <div class="flex justify-center space-x-2 mb-4">
+                            ${numerosGanhadores.map(num => `<div class="bg-white text-black w-12 h-12 rounded-full flex items-center justify-center font-bold">${num}</div>`).join('')}
+                            <div class="bg-red-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold">${megaBall}</div>
+                        </div>
+                        <div class="text-yellow-300 text-sm">Próximo sorteio em breve...</div>
+                    </div>
+                `;
+                
+                // Atualizar depoimentos
+                atualizarDepoimentos();
+                
+                setTimeout(() => {
+                    // Voltar ao countdown normal
+                    countdownTimer.style.background = 'linear-gradient(145deg, #1f2937, #374151)';
+                    countdownTimer.innerHTML = `
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-300">⏰ Próximo Sorteio em:</h3>
+                        <div class="grid grid-cols-4 gap-4 text-center">
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <div id="hours" class="countdown-number text-4xl font-bold">00</div>
+                                <div class="text-yellow-300 text-sm font-medium">HORAS</div>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <div id="minutes" class="countdown-number text-4xl font-bold">14</div>
+                                <div class="text-yellow-300 text-sm font-medium">MINUTOS</div>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <div id="seconds" class="countdown-number text-4xl font-bold">59</div>
+                                <div class="text-yellow-300 text-sm font-medium">SEGUNDOS</div>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <div id="milliseconds" class="countdown-number text-2xl font-bold">999</div>
+                                <div class="text-yellow-300 text-xs font-medium">MILISSEG</div>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-yellow-300 font-medium">
+                            🎲 Sorteio Automático • 🏆 Resultado Instantâneo
+                        </div>
+                    `;
+                }, 5000);
+            }, 3000);
+        }
+        
+        // Função para atualizar depoimentos
+        function atualizarDepoimentos() {
+            const depoimentosContainer = document.querySelector('#depoimentos .grid');
+            
+            // Selecionar 6 depoimentos aleatórios
+            const novosDepoimentos = [];
+            const poolCopy = [...depoimentosPool];
+            
+            for (let i = 0; i < 6; i++) {
+                const randomIndex = Math.floor(Math.random() * poolCopy.length);
+                novosDepoimentos.push(poolCopy.splice(randomIndex, 1)[0]);
+            }
+            
+            // Atualizar com animação
+            depoimentosContainer.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                depoimentosContainer.innerHTML = novosDepoimentos.map(depoimento => `
+                    <div class="testimonial-card testimonial-update p-8 rounded-2xl shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-${depoimento.cor}-500 rounded-full flex items-center justify-center text-white font-bold mr-4">${depoimento.inicial}</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">${depoimento.nome}</h4>
+                                <p class="text-gray-600 text-sm">${depoimento.cidade}</p>
+                            </div>
+                        </div>
+                        <div class="text-yellow-400 mb-4">⭐⭐⭐⭐⭐</div>
+                        <p class="text-gray-700 mb-4">"${depoimento.texto}"</p>
+                        <div class="text-sm text-blue-600 font-medium">Pacote: ${depoimento.pacote}</div>
+                    </div>
+                `).join('');
+                
+                depoimentosContainer.style.opacity = '1';
+                depoimentosAtuais = novosDepoimentos;
+            }, 500);
+        }
+
+        // Função da chuva de dinheiro
+        function criarChuvaDinheiro() {
+            const moneyRain = document.getElementById('money-rain');
+            const emojis = ['💰', '💵', '💸', '🤑', '💎', '🏆', '💳', '🎰'];
+            
+            setInterval(() => {
+                if (Math.random() < 0.3) { // 30% de chance a cada intervalo
+                    const money = document.createElement('div');
+                    money.className = 'money-drop';
+                    money.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    money.style.left = Math.random() * 100 + '%';
+                    money.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    money.style.opacity = Math.random() * 0.7 + 0.3;
+                    
+                    moneyRain.appendChild(money);
+                    
+                    // Remove o elemento após a animação
+                    setTimeout(() => {
+                        if (moneyRain.contains(money)) {
+                            moneyRain.removeChild(money);
+                        }
+                    }, 5000);
+                }
+            }, 500);
+        }
+        
+        // Função para criar efeitos de urgência
+        function criarEfeitosUrgencia() {
+            // Piscar o banner de urgência
+            const banner = document.querySelector('.urgency-banner');
+            setInterval(() => {
+                banner.style.opacity = banner.style.opacity === '0.7' ? '1' : '0.7';
+            }, 1000);
+            
+            // Adicionar efeitos sonoros visuais (sem áudio real)
+            setInterval(() => {
+                const elementos = document.querySelectorAll('.shake-animation');
+                elementos.forEach(el => {
+                    el.style.animation = 'none';
+                    setTimeout(() => {
+                        el.style.animation = 'shake 0.5s infinite';
+                    }, 10);
+                });
+            }, 5000);
+        }
+
         // Inicializar página
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Mega Millions Brasil - Site carregado com sucesso!');
+            iniciarCountdown();
+            criarChuvaDinheiro();
+            criarEfeitosUrgencia();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98e8d4812791e11a',t:'MTc2MDQ2MzI5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98e8e9dea3756d57',t:'MTc2MDQ2NDE2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
