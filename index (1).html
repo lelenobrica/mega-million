@@ -551,37 +551,43 @@
         }
 
         async function joinBolao(id) {
-            try {
-                const res = await fetch('/api/bolao/' + id + '/join', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user: demoUser }) });
-                const data = await res.json();
-                if (res.ok) {
-                    showToast('Cota comprada (demo).');
-                    fetchBoloes();
-                } else {
-                    showToast(data.message || 'Erro ao comprar cota');
-                }
-            } catch (err) {
-                showToast('Erro de conexão com o servidor');
-            }
-        }
+    const cnpj = "63.173.859/0001-12";
 
-        async function showCreateBolao() {
-            showToast('Funcionalidade de criar bolão em desenvolvimento!');
-        }
+    // Cria um modal centralizado para mostrar o CNPJ
+    const modal = document.createElement('div');
+    modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+    modal.innerHTML = `
+        <div class="bg-white rounded-xl p-6 max-w-sm w-full text-center shadow-lg">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Pagamento</h3>
+            <p class="text-gray-700 mb-4">Pague via Pix para o CNPJ abaixo:</p>
+            <div class="bg-gray-100 p-3 rounded-lg text-lg font-semibold mb-4 select-all">${cnpj}</div>
+            <button id="closeCnpjModal" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition">Fechar</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
 
-        async function checkTickets() {
-            try {
-                const res = await fetch('/api/mybets', { method: 'GET' });
-                const data = await res.json();
-                if (res.ok) {
-                    showToast('Você tem ' + data.bets.length + ' apostas (demo)');
-                } else {
-                    showToast('Erro ao buscar apostas');
-                }
-            } catch (err) {
-                showToast('Erro de conexão com o servidor');
-            }
-        }
+    // Fecha o modal ao clicar no botão
+    document.getElementById('closeCnpjModal').onclick = () => modal.remove();
+}
+async function joinBolao(id) {
+    const cnpj = "63.173.859/0001-12";
+
+    // Cria um modal centralizado para mostrar o CNPJ
+    const modal = document.createElement('div');
+    modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+    modal.innerHTML = `
+        <div class="bg-white rounded-xl p-6 max-w-sm w-full text-center shadow-lg">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Pagamento</h3>
+            <p class="text-gray-700 mb-4">Pague via Pix para o CNPJ abaixo:</p>
+            <div class="bg-gray-100 p-3 rounded-lg text-lg font-semibold mb-4 select-all">${cnpj}</div>
+            <button id="closeCnpjModal" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition">Fechar</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Fecha o modal ao clicar no botão
+    document.getElementById('closeCnpjModal').onclick = () => modal.remove();
+}
 
         // Backend fetches for boloes and results (demo)
         async function fetchBoloes() {
