@@ -967,13 +967,34 @@
             document.getElementById('modal-pix').classList.add('flex');
         }
 
-        // Copiar chave PIX
-        function copiarChavePix() {
-            const chavePix = '63.173.859/0001-12';
-            navigator.clipboard.writeText(chavePix).then(() => {
-                mostrarNotificacao('Chave PIX copiada com sucesso!', 'success');
-            });
-        }
+        <!-- HTML -->
+<div id="pixContainer">
+    <button id="gerarPix">Gerar PIX</button>
+    <div id="qrCodePIX"></div>
+</div>
+
+<!-- Adicione a biblioteca de QR Code -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+const gerarPixButton = document.getElementById('gerarPix');
+const qrCodeDiv = document.getElementById('qrCodePIX');
+
+gerarPixButton.addEventListener('click', () => {
+    // Limpa QR anterior
+    qrCodeDiv.innerHTML = '';
+
+    // Aqui você coloca a chave PIX ou o payload do PIX
+    const chavePIX = "00020126580014BR.GOV.BCB.PIX0114SEU-CNPJ-OU-EMAIL52040000530398654041.005802BR5925Nome do Recebedor6009Cidade do Recebedor62070503***6304";
+
+    // Gera o QR code
+    new QRCode(qrCodeDiv, {
+        text: chavePIX,
+        width: 200,
+        height: 200,
+    });
+});
+</script>
 
         // Confirmar pagamento
         function confirmarPagamento() {
