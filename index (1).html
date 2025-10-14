@@ -3,195 +3,676 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MegaBolão - Organize suas apostas na Mega-Sena</title>
+    <title>Mega Millions Brasil - Bilhetes Lotéricos Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1e3a8a',
-                        secondary: '#1e40af',
-                        accent: '#fbbf24',
-                        gold: '#f59e0b'
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { box-sizing: border-box; }
-        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); }
-        .card-shadow { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
-        .number-ball {
-            width: 40px; height: 40px; border-radius: 50%; display: inline-flex;
-            align-items: center; justify-content: center; font-weight: bold; color: white;
-            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        body {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
-        .fade-in { animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        #toast { position: fixed; right: 20px; bottom: 20px; background: #111827; color: white; padding: 12px 16px; border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); display:none; z-index:9999; }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 25%, #7c3aed 50%, #c026d3 75%, #db2777 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-premium {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-premium:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .lottery-orb {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0 8px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); }
+            to { box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6); }
+        }
+        
+        .premium-badge {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a202c;
+            font-weight: 800;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin: 0 auto 1rem;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .security-badge {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
     </style>
 </head>
-<body class="bg-gray-50 min-h-full">
-    <!-- Header -->
-    <header class="gradient-bg text-white shadow-lg">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-2">
-                    <div class="number-ball text-sm">🎯</div>
-                    <h1 class="text-2xl font-bold">MegaBolão</h1>
+<body class="min-h-full bg-gray-50">
+    <!-- Header Premium -->
+    <header class="hero-gradient text-white py-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-6">
+                    <div class="text-6xl floating-animation">🎰</div>
+                    <div>
+                        <h1 class="text-4xl font-bold mb-2">Mega Millions Brasil</h1>
+                        <p class="text-blue-100 text-lg">A maior loteria premium do país</p>
+                        <div class="flex items-center space-x-4 mt-2">
+                            <span class="security-badge">
+                                🔒 100% Seguro
+                            </span>
+                            <span class="security-badge">
+                                ✅ Licenciado
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <nav class="hidden md:flex space-x-6">
-                    <a href="#" class="hover:text-accent transition-colors" onclick="showSection('hero')">Início</a>
-                    <a href="#" class="hover:text-accent transition-colors" onclick="showSection('how')">Como Funciona</a>
-                    <a href="#" class="hover:text-accent transition-colors" onclick="showSection('results')">Resultados</a>
-                    <a href="#" class="hover:text-accent transition-colors" onclick="showSection('help')">Ajuda</a>
-                </nav>
-                <div class="flex space-x-2">
-                    <button onclick="showLogin()" class="bg-white text-primary px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">Entrar</button>
-                    <button onclick="showSignup()" class="bg-accent text-white px-4 py-2 rounded-lg font-semibold hover:bg-gold transition-colors">Cadastrar</button>
+                <div class="hidden lg:flex items-center space-x-3">
+                    <span class="lottery-orb">07</span>
+                    <span class="lottery-orb">14</span>
+                    <span class="lottery-orb">21</span>
+                    <span class="lottery-orb">28</span>
+                    <span class="lottery-orb">35</span>
+                    <span class="lottery-orb">42</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
-        <!-- Hero Section -->
-        <section id="hero" class="text-center mb-12 fade-in">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">Organize suas apostas na Mega-Sena</h2>
-            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">Crie bolões, compre cotas, acompanhe resultados e gerencie suas apostas de forma transparente e segura.</p>
-            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
-                <div class="bg-white p-6 rounded-xl card-shadow hover:shadow-lg transition-shadow cursor-pointer" onclick="showBetGenerator()">
-                    <div class="text-4xl mb-4">🎲</div>
-                    <h3 class="text-xl font-semibold mb-2">Gerar Aposta</h3>
-                    <p class="text-gray-600">Crie apostas aleatórias ou escolha seus números da sorte</p>
+    <!-- Hero Section Premium -->
+    <section class="py-20 bg-gradient-to-br from-blue-50 to-purple-50 relative">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-6xl font-bold text-gray-800 mb-6">Prêmio Acumulado</h2>
+                <div class="stats-counter mb-8">R$ 250.000.000</div>
+                <div class="glass-effect rounded-2xl p-8 mb-8 max-w-2xl mx-auto">
+                    <p class="text-xl text-gray-700 mb-4">🕐 Próximo sorteio: <strong>Sexta-feira às 20h</strong></p>
+                    <p class="text-lg text-gray-600">⏰ Restam apenas <strong class="text-red-600">2 dias, 14h e 32min</strong></p>
                 </div>
-                <div class="bg-white p-6 rounded-xl card-shadow hover:shadow-lg transition-shadow cursor-pointer" onclick="showBoloes()">
-                    <div class="text-4xl mb-4">👥</div>
-                    <h3 class="text-xl font-semibold mb-2">Bolões</h3>
-                    <p class="text-gray-600">Participe ou crie bolões com outros apostadores</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl card-shadow hover:shadow-lg transition-shadow cursor-pointer" onclick="showResults()">
-                    <div class="text-4xl mb-4">🏆</div>
-                    <h3 class="text-xl font-semibold mb-2">Resultados</h3>
-                    <p class="text-gray-600">Confira os resultados oficiais e seus acertos</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Login Modal -->
-        <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-            <div class="bg-white rounded-xl p-8 max-w-md w-full">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800">Entrar</h3>
-                    <button onclick="hideModals()" class="text-gray-500 hover:text-gray-700">✕</button>
-                </div>
-                <form id="loginForm" onsubmit="handleLogin(event)">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">E-mail ou Telefone</label>
-                        <input id="loginIdentifier" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" placeholder="seu@email.com ou (11) 99999-9999" required>
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Senha</label>
-                        <input id="loginPassword" type="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" placeholder="Sua senha" required>
-                    </div>
-                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-secondary transition-colors">Entrar</button>
-                </form>
-                <div class="mt-4 text-center">
-                    <a href="#" class="text-primary hover:underline">Esqueci minha senha</a>
+                
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Signup Modal -->
-        <div id="signupModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-            <div class="bg-white rounded-xl p-8 max-w-md w-full">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800">Cadastrar</h3>
-                    <button onclick="hideModals()" class="text-gray-500 hover:text-gray-700">✕</button>
-                </div>
-                <form id="signupForm" onsubmit="handleSignup(event)">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Nome Completo</label>
-                        <input id="signupName" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" placeholder="Seu nome completo" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">E-mail</label>
-                        <input id="signupEmail" type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" placeholder="seu@email.com" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Telefone</label>
-                        <input id="signupPhone" type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" placeholder="(11) 99999-9999" required>
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Senha</label>
-                        <input id="signupPassword" type="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary" placeholder="Mínimo 8 caracteres" required>
-                    </div>
-                    <div class="mb-6">
-                        <label class="flex items-center">
-                            <input id="signupAgree" type="checkbox" class="mr-2" required>
-                            <span class="text-sm text-gray-600">Aceito os <a href="#" class="text-primary hover:underline">termos de uso</a> e <a href="#" class="text-primary hover:underline">política de privacidade</a></span>
-                        </label>
-                    </div>
-                    <button type="submit" class="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:bg-gold transition-colors">Criar Conta</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Bolões Section -->
-        <section id="boloes" class="hidden fade-in">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Bolões Disponíveis</h2>
-                <div id="bolaoGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"></div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-16">
+    <!-- Estatísticas -->
+    <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
                 <div>
-                    <h4 class="font-bold mb-4">MegaBolão</h4>
-                    <p class="text-gray-400 text-sm">Plataforma para organização transparente de apostas na Mega-Sena.</p>
+                    <div class="stats-counter">1.2M+</div>
+                    <p class="text-gray-600 font-semibold">Jogadores Ativos</p>
+                </div>
+                <div>
+                    <div class="stats-counter">R$ 2.8B</div>
+                    <p class="text-gray-600 font-semibold">Prêmios Pagos</p>
+                </div>
+                <div>
+                    <div class="stats-counter">15.7K</div>
+                    <p class="text-gray-600 font-semibold">Ganhadores Este Mês</p>
+                </div>
+                <div>
+                    <div class="stats-counter">99.9%</div>
+                    <p class="text-gray-600 font-semibold">Satisfação</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pacotes Premium -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-gray-800 mb-6">Pacotes Exclusivos</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Escolha o pacote ideal para maximizar suas chances de ganhar o grande prêmio</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Pacote Básico -->
+                <div class="card-premium rounded-2xl p-8 relative">
+                    <div class="text-center">
+                        <div class="feature-icon mb-6">🎫</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Pacote Iniciante</h3>
+                        <div class="text-5xl font-bold text-blue-600 mb-2">R$ 29,90</div>
+                        <div class="text-gray-500 mb-6">100 Bilhetes Premium</div>
+                        
+                        <div class="bg-blue-50 rounded-xl p-4 mb-6">
+                            <div class="text-sm text-blue-800 font-semibold mb-2">Inclui:</div>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> 100 jogos únicos gerados</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Números otimizados por IA</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Suporte via WhatsApp</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Comprovante digital</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Notificação de resultados</li>
+                            </ul>
+                        </div>
+                        
+                        <button onclick="selectPackage('100', '29,90')" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-6 rounded-xl transition duration-300 transform hover:scale-105">
+                            Comprar Agora
+                        </button>
+                        <p class="text-xs text-gray-500 mt-2">Chance: 1 em 292 milhões</p>
+                    </div>
+                </div>
+
+                <!-- Pacote Popular -->
+                <div class="card-premium rounded-2xl p-8 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="premium-badge px-6 py-2 rounded-full text-sm font-bold">POPULAR</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="feature-icon mb-6" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">🎟️</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Pacote Estratégico</h3>
+                        <div class="text-5xl font-bold text-green-600 mb-2">R$ 49,90</div>
+                        <div class="text-gray-500 mb-6">200 Bilhetes Premium</div>
+                        
+                        <div class="bg-green-50 rounded-xl p-4 mb-6">
+                            <div class="text-sm text-green-800 font-semibold mb-2">Inclui tudo do Iniciante +</div>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> 200 jogos estratégicos</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Análise de padrões</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Suporte prioritário</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Estatísticas detalhadas</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Grupo VIP Telegram</li>
+                            </ul>
+                        </div>
+                        
+                        <button onclick="selectPackage('200', '49,90')" class="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold py-4 px-6 rounded-xl transition duration-300 transform hover:scale-105">
+                            Comprar Agora
+                        </button>
+                        <p class="text-xs text-gray-500 mt-2">Chance: 2x melhor que o básico</p>
+                    </div>
+                </div>
+
+                <!-- Pacote Premium -->
+                <div class="card-premium rounded-2xl p-8 relative border-2 border-orange-300">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 rounded-full text-sm font-bold">RECOMENDADO</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="feature-icon mb-6" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">🎪</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Pacote Profissional</h3>
+                        <div class="text-5xl font-bold text-orange-600 mb-2">R$ 79,90</div>
+                        <div class="text-gray-500 mb-6">500 Bilhetes Premium</div>
+                        
+                        <div class="bg-orange-50 rounded-xl p-4 mb-6">
+                            <div class="text-sm text-orange-800 font-semibold mb-2">Inclui tudo do Estratégico +</div>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> 500 jogos profissionais</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> IA avançada de predição</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Consultoria especializada</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Relatórios personalizados</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Acesso antecipado</li>
+                            </ul>
+                        </div>
+                        
+                        <button onclick="selectPackage('500', '79,90')" class="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold py-4 px-6 rounded-xl transition duration-300 transform hover:scale-105">
+                            Comprar Agora
+                        </button>
+                        <p class="text-xs text-gray-500 mt-2">Chance: 5x melhor que o básico</p>
+                    </div>
+                </div>
+
+                <!-- Pacote VIP -->
+                <div class="card-premium rounded-2xl p-8 relative border-2 border-purple-300">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-bold">EXCLUSIVO</span>
+                    </div>
+                    <div class="text-center">
+                        <div class="feature-icon mb-6" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">👑</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Pacote Milionário</h3>
+                        <div class="text-5xl font-bold text-purple-600 mb-2">R$ 147,50</div>
+                        <div class="text-gray-500 mb-6">1000 Bilhetes Premium</div>
+                        
+                        <div class="bg-purple-50 rounded-xl p-4 mb-6">
+                            <div class="text-sm text-purple-800 font-semibold mb-2">Inclui tudo do Profissional +</div>
+                            <ul class="text-left space-y-2 text-sm">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> 1000 jogos exclusivos</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Algoritmo proprietário</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Gerente pessoal</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Análise matemática completa</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Garantia de satisfação</li>
+                            </ul>
+                        </div>
+                        
+                        <button onclick="selectPackage('1000', '147,50')" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 px-6 rounded-xl transition duration-300 transform hover:scale-105">
+                            Comprar Agora
+                        </button>
+                        <p class="text-xs text-gray-500 mt-2">Chance: 10x melhor que o básico</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">O que dizem nossos ganhadores</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mr-4">M</div>
+                        <div>
+                            <h4 class="font-bold">Maria Silva</h4>
+                            <p class="text-sm text-gray-600">Ganhadora de R$ 50.000</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Comprei o pacote de 500 bilhetes e ganhei na quadra! O sistema realmente funciona. Recomendo!"</p>
+                    <div class="flex text-yellow-400 mt-2">⭐⭐⭐⭐⭐</div>
+                </div>
+                
+                <div class="testimonial-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4">J</div>
+                        <div>
+                            <h4 class="font-bold">João Santos</h4>
+                            <p class="text-sm text-gray-600">Ganhador de R$ 125.000</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"Terceiro mês consecutivo ganhando com os números da IA. Melhor investimento que já fiz!"</p>
+                    <div class="flex text-yellow-400 mt-2">⭐⭐⭐⭐⭐</div>
+                </div>
+                
+                <div class="testimonial-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4">A</div>
+                        <div>
+                            <h4 class="font-bold">Ana Costa</h4>
+                            <p class="text-sm text-gray-600">Ganhadora de R$ 2.1 milhões</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"INACREDITÁVEL! Ganhei mais de 2 milhões com o pacote VIP. Mudou minha vida completamente!"</p>
+                    <div class="flex text-yellow-400 mt-2">⭐⭐⭐⭐⭐</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona -->
+    <section class="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center text-gray-800 mb-16">Como Funciona</h2>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="feature-icon mb-6">1️⃣</div>
+                    <h3 class="text-xl font-bold mb-4">Escolha seu Pacote</h3>
+                    <p class="text-gray-600">Selecione o pacote ideal baseado no seu orçamento e estratégia de jogo</p>
+                </div>
+                <div class="text-center">
+                    <div class="feature-icon mb-6">2️⃣</div>
+                    <h3 class="text-xl font-bold mb-4">Pagamento Seguro</h3>
+                    <p class="text-gray-600">Pague via PIX, cartão ou transferência com total segurança e criptografia</p>
+                </div>
+                <div class="text-center">
+                    <div class="feature-icon mb-6">3️⃣</div>
+                    <h3 class="text-xl font-bold mb-4">IA Gera os Números</h3>
+                    <p class="text-gray-600">Nossa inteligência artificial analisa padrões e gera seus números otimizados</p>
+                </div>
+                <div class="text-center">
+                    <div class="feature-icon mb-6">4️⃣</div>
+                    <h3 class="text-xl font-bold mb-4">Receba e Ganhe</h3>
+                    <p class="text-gray-600">Receba seus bilhetes por email e aguarde os resultados do sorteio</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Compra Premium -->
+    <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-lg w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="text-center mb-8">
+                <h3 class="text-3xl font-bold text-gray-800 mb-4">Finalizar Compra</h3>
+                
+            </div>
+            
+            <div class="mb-8">
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border-2 border-blue-200">
+                    <h4 class="font-bold text-lg mb-4 text-center">Resumo do Pedido</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Pacote:</span>
+                            <span id="selectedPackage" class="text-blue-600 font-bold"></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">Quantidade:</span>
+                            <span id="selectedTickets" class="text-gray-700"></span>
+                        </div>
+                        <div class="border-t pt-3">
+                            <div class="flex justify-between items-center text-2xl font-bold text-green-600">
+                                <span>Total:</span>
+                                <span id="selectedPrice"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form onsubmit="processPurchase(event)" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo</label>
+                        <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">CPF</label>
+                        <input type="text" required placeholder="000.000.000-00" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                    <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Telefone/WhatsApp</label>
+                    <input type="tel" required placeholder="(11) 99999-9999" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                
+                <!-- Seção PIX Premium -->
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-6">
+                    <h4 class="font-bold text-green-800 mb-4 flex items-center text-lg">
+                        <span class="mr-3 text-2xl">💳</span> Pagamento via PIX
+                    </h4>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-4 border border-green-200">
+                            <label class="block text-sm font-semibold text-green-700 mb-2">Link de Pagamento PIX:</label>
+                            <div class="flex items-center space-x-3">
+                            <div class="bg-white rounded-lg p-4 border border-green-200">
+    <label class="block text-sm font-semibold text-green-700 mb-2">Chave PIX (CNPJ):</label>
+    <div class="flex items-center space-x-3">
+        <input type="text" id="pixCnpjKey" value="63.173.859/0001-12" readonly 
+               class="flex-1 px-4 py-3 bg-gray-50 border border-green-300 rounded-lg text-sm font-mono text-gray-700">
+        <button type="button" onclick="copyPixCnpj()" 
+                class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300 transform hover:scale-105">
+            Copiar
+        </button>
+    </div>
+</div>
+
+                        
+                        <div class="bg-green-100 rounded-lg p-4">
+                            <h5 class="font-semibold text-green-800 mb-3 flex items-center">
+                                📱 Instruções de Pagamento:
+                            </h5>
+                            <ol class="list-decimal list-inside space-y-2 text-sm text-green-700">
+                                <li>Copie a chave PIX acima clicando em "Copiar"</li>
+                                <li>Abra o aplicativo do seu banco ou carteira digital</li>
+                                <li>Selecione a opção "PIX" → "Transferir" ou "Pagar"</li>
+                                <li>Cole a chave PIX copiada</li>
+                                <li>Confirme o valor exato: <strong id="pixValue"></strong></li>
+                                <li>Finalize o pagamento no seu banco</li>
+                                <li>Volte aqui e clique em "Confirmar Compra"</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2 text-sm text-green-700">
+                            <span>🔒</span>
+                            <span>Pagamento processado instantaneamente • Seus bilhetes chegam em até 5 minutos</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-4 pt-6">
+                    <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-4 px-6 rounded-xl transition duration-300">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition duration-300 transform hover:scale-105">
+                        Confirmar Compra
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Premium -->
+    <footer class="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <span class="mr-2">🎰</span> Mega Millions Brasil
+                    </h3>
+                    <p class="text-gray-300 mb-4">A plataforma de loteria mais confiável e tecnológica do Brasil.</p>
+                    <div class="flex space-x-4">
+                        <span class="security-badge">🏆 Premiada</span>
+                        <span class="security-badge">🔐 Segura</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Contato</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="flex items-center"><span class="mr-2">📧</span> megamillionsbrasil@gmail.com</p>
+                        <p class="flex items-center"><span class="mr-2">📱</span> (11) 4002-8922</p>
+                        <p class="flex items-center"><span class="mr-2">💬</span> WhatsApp: (11) 99999-9999</p>
+                        <p class="flex items-center"><span class="mr-2">🕐</span> Atendimento 24/7</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Segurança</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="flex items-center"><span class="mr-2">🔒</span> SSL 256 bits</p>
+                        <p class="flex items-center"><span class="mr-2">🛡️</span> Dados protegidos</p>
+                        <p class="flex items-center"><span class="mr-2">✅</span> Licença SECAP</p>
+                        <p class="flex items-center"><span class="mr-2">🏦</span> Pagamentos seguros</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Redes Sociais</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="flex items-center"><span class="mr-2">📘</span> Facebook: @MegaMillionsBR</p>
+                        <p class="flex items-center"><span class="mr-2">📷</span> Instagram: @megamillions_br</p>
+                        <p class="flex items-center"><span class="mr-2">🐦</span> Twitter: @MegaMillionsBR</p>
+                        <p class="flex items-center"><span class="mr-2">📺</span> YouTube: Mega Millions Brasil</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 mb-4 md:mb-0">© 2024 Mega Millions Brasil. Todos os direitos reservados.</p>
+                    <div class="flex space-x-6 text-sm text-gray-400">
+                        <a href="#" class="hover:text-white transition">Termos de Uso</a>
+                        <a href="#" class="hover:text-white transition">Política de Privacidade</a>
+                        <a href="#" class="hover:text-white transition">Jogo Responsável</a>
+                    </div>
+                </div>
+                
                 </div>
             </div>
         </div>
     </footer>
 
-    <div id="toast"></div>
-
     <script>
-        let selectedNumbers = [];
-        let currentSection = 'hero';
-        let demoUser = { id: null, name: null };
+        let selectedPackageData = {};
 
-        function showToast(msg) {
-            const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.style.display = 'block';
-            setTimeout(() => { t.style.display = 'none'; }, 3500);
+        function selectPackage(tickets, price) {
+            selectedPackageData = { tickets, price };
+            
+            document.getElementById('selectedPackage').textContent = getPackageName(tickets);
+            document.getElementById('selectedTickets').textContent = tickets + ' bilhetes premium';
+            document.getElementById('selectedPrice').textContent = 'R$ ' + price;
+            document.getElementById('pixValue').textContent = 'R$ ' + price;
+            
+            document.getElementById('purchaseModal').classList.remove('hidden');
+            document.getElementById('purchaseModal').classList.add('flex');
         }
 
-        async function joinBolao(id) {
-            const cnpj = "63.173.859/0001-12";
-
-            const modal = document.createElement('div');
-            modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
-            modal.innerHTML = `
-                <div class="bg-white rounded-xl p-6 max-w-sm w-full text-center shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Pagamento</h3>
-                    <p class="text-gray-700 mb-4">Pague via Pix para o CNPJ abaixo:</p>
-                    <div class="bg-gray-100 p-3 rounded-lg text-lg font-semibold mb-4 select-all">${cnpj}</div>
-                    <button id="closeCnpjModal" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition">Fechar</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-            document.getElementById('closeCnpjModal').onclick = () => modal.remove();
+        function getPackageName(tickets) {
+            const names = {
+                '100': 'Pacote Iniciante',
+                '200': 'Pacote Estratégico', 
+                '500': 'Pacote Profissional',
+                '1000': 'Pacote Milionário'
+            };
+            return names[tickets] || 'Pacote';
         }
+
+        function closeModal() {
+            document.getElementById('purchaseModal').classList.add('hidden');
+            document.getElementById('purchaseModal').classList.remove('flex');
+        }
+
+        function processPurchase(event) {
+            event.preventDefault();
+            
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.textContent = 'Processando pagamento...';
+            button.disabled = true;
+            
+            // Simular processamento mais realista
+            setTimeout(() => {
+                button.textContent = 'Validando PIX...';
+                setTimeout(() => {
+                    button.textContent = 'Gerando bilhetes...';
+                    setTimeout(() => {
+                        alert('🎉 COMPRA REALIZADA COM SUCESSO!\n\n' + 
+                              '✅ Pagamento confirmado via PIX\n' +
+                              '🎫 ' + selectedPackageData.tickets + ' bilhetes premium gerados\n' +
+                              '📧 Bilhetes enviados para seu email\n' +
+                              '🍀 Boa sorte no próximo sorteio!\n\n' +
+                              '📱 Você receberá atualizações via WhatsApp\n\n');
+                        
+                        closeModal();
+                        button.textContent = originalText;
+                        button.disabled = false;
+                        event.target.reset();
+                    }, 1500);
+                }, 1000);
+            }, 2000);
+        }
+
+        function copyPixKey() {
+            const pixKey = 'link.mercadopago.com.br/megamillionbr';
+            navigator.clipboard.writeText(pixKey).then(function() {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✅ Copiado!';
+                button.classList.remove('bg-green-600', 'hover:bg-green-700');
+                button.classList.add('bg-green-800');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-800');
+                    button.classList.add('bg-green-600', 'hover:bg-green-700');
+                }, 3000);
+            }).catch(function() {
+                alert('Chave PIX copiada:\nlink.mercadopago.com.br/megamillionbr');
+            });
+        }
+
+        // Fechar modal clicando fora
+        document.getElementById('purchaseModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Animação de contador para estatísticas
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stats-counter');
+            counters.forEach(counter => {
+                const target = counter.textContent;
+                counter.textContent = '0';
+                
+                const increment = () => {
+                    const current = parseInt(counter.textContent.replace(/[^\d]/g, ''));
+                    const targetNum = parseInt(target.replace(/[^\d]/g, ''));
+                    const step = targetNum / 100;
+                    
+                    if (current < targetNum) {
+                        counter.textContent = target.replace(/[\d.]+/, Math.ceil(current + step).toLocaleString());
+                        setTimeout(increment, 20);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                setTimeout(increment, Math.random() * 1000);
+            });
+        }
+
+        // Iniciar animações quando a página carregar
+        window.addEventListener('load', animateCounters);
     </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98e155e7f75ce2a0',t:'MTc2MDM4NDcwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><
+ <script>
+function copyPixCnpj() {
+    const cnpjKey = document.getElementById('pixCnpjKey');
+    navigator.clipboard.writeText(cnpjKey.value);
+    alert("✅ Chave PIX (CNPJ) copiada com sucesso!");
+}
+</script>
 </body>
 </html>
 
