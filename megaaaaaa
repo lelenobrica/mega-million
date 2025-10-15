@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Millions Brasil - Sorteios Semanais R$ 10.000+</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #dc2626 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        .winner-scroll {
+            animation: scroll 30s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .countdown-digit {
+            background: linear-gradient(145deg, #1e40af, #3730a3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .premium-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(145deg, #fbbf24, #f59e0b, #d97706);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: exclude;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
+        .testimonial-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="container mx-auto px-4 py-6 relative z-10">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                        <span class="text-3xl font-bold text-white">💰</span>
+                    </div>
+                    <div>
+                        <h1 class="text-4xl font-bold bg-gradient-to-r from-yellow-300 to-white bg-clip-text text-transparent">Mega Millions Brasil</h1>
+                        <p class="text-yellow-200 text-sm">Sorteios Semanais • Prêmios a partir de R$ 10.000</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <button onclick="showSection('home')" class="hover:text-yellow-300 transition-all duration-300 font-semibold border-b-2 border-transparent hover:border-yellow-300">Início</button>
+                    <button onclick="showSection('tickets')" class="hover:text-yellow-300 transition-all duration-300 font-semibold border-b-2 border-transparent hover:border-yellow-300">Bilhetes</button>
+                    <button onclick="showSection('financial')" class="hover:text-yellow-300 transition-all duration-300 font-semibold border-b-2 border-transparent hover:border-yellow-300">Financeiro</button>
+                    <button onclick="showSection('feedback')" class="hover:text-yellow-300 transition-all duration-300 font-semibold border-b-2 border-transparent hover:border-yellow-300">Depoimentos</button>
+                    <button onclick="showSection('bolao')" class="hover:text-yellow-300 transition-all duration-300 font-semibold border-b-2 border-transparent hover:border-yellow-300">Bolões</button>
+                    <button onclick="showSection('winners')" class="hover:text-yellow-300 transition-all duration-300 font-semibold border-b-2 border-transparent hover:border-yellow-300">Ganhadores</button>
+                    <button onclick="showSection('contact')" class="hover:text-yellow-300 transition-all duration-300 font-semibold border-b-2 border-transparent hover:border-yellow-300">Contato</button>
+                    <button onclick="showLoginModal()" class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 rounded-full font-bold hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 shadow-lg transform hover:scale-105">Entrar</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Winners Ticker -->
+    <div class="bg-green-600 text-white py-2 overflow-hidden">
+        <div class="winner-scroll whitespace-nowrap">
+            <span id="winnersTicker" class="inline-block px-4">
+                🏆 Últimos Ganhadores: Maria S. ganhou R$ 15.000 • João P. ganhou R$ 25.000 • Ana L. ganhou R$ 12.500 • Carlos M. ganhou R$ 18.750 • Lucia F. ganhou R$ 22.000 • Roberto S. ganhou R$ 16.800 • Patricia O. ganhou R$ 19.200 • Fernando L. ganhou R$ 14.300 • Camila R. ganhou R$ 21.500 • Diego A. ganhou R$ 17.900
+            </span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Home Section -->
+        <section id="home" class="section-content">
+            <!-- Hero Section -->
+            <div class="text-center mb-12">
+                <h2 class="text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">🎰 Próximo Sorteio</h2>
+                <div class="bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-2xl p-10 max-w-2xl mx-auto border border-gray-200">
+                    <div class="text-8xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-4" id="nextPrize">R$ 10.000</div>
+                    <div class="text-xl text-gray-600 mb-6">Prêmio Mínimo Garantido</div>
+                    
+                    <!-- Countdown Timer -->
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-6 mb-6">
+                        <div class="text-white text-lg font-semibold mb-4">Próximo Sorteio:</div>
+                        <div class="text-2xl font-bold text-yellow-300 mb-4" id="nextDrawDate">Sexta-feira, 00/00/0000 às 19h</div>
+                        <div class="grid grid-cols-4 gap-4">
+                            <div class="countdown-digit text-white rounded-xl p-4 text-center">
+                                <div class="text-3xl font-bold" id="days">00</div>
+                                <div class="text-sm">Dias</div>
+                            </div>
+                            <div class="countdown-digit text-white rounded-xl p-4 text-center">
+                                <div class="text-3xl font-bold" id="hours">00</div>
+                                <div class="text-sm">Horas</div>
+                            </div>
+                            <div class="countdown-digit text-white rounded-xl p-4 text-center">
+                                <div class="text-3xl font-bold" id="minutes">00</div>
+                                <div class="text-sm">Min</div>
+                            </div>
+                            <div class="countdown-digit text-white rounded-xl p-4 text-center">
+                                <div class="text-3xl font-bold" id="seconds">00</div>
+                                <div class="text-sm">Seg</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Winners Display -->
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
+                        <div class="text-green-800 font-semibold mb-2">🏆 Ganhadores Recentes</div>
+                        <div id="recentWinners" class="text-sm text-green-700">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ticket Packages -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="premium-card relative rounded-2xl shadow-2xl p-8 card-hover">
+                    <div class="text-center">
+                        <div class="text-5xl mb-4">🎫</div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">100 Bilhetes</h3>
+                        <div class="text-sm text-gray-600 mb-4">Pacote Iniciante • Mais chances de ganhar</div>
+                        <div class="text-4xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-6">R$ 29,90</div>
+                        <button onclick="selectPackage('100', '29.90')" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-bold text-lg shadow-lg transform hover:scale-105">
+                            Comprar Agora
+                        </button>
+                        <div class="text-xs text-gray-500 mt-2">Entrega em até 30 minutos</div>
+                    </div>
+                </div>
+
+                <div class="premium-card relative rounded-2xl shadow-2xl p-8 card-hover">
+                    <div class="text-center">
+                        <div class="text-5xl mb-4">🎫🎫</div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">200 Bilhetes</h3>
+                        <div class="text-sm text-gray-600 mb-4">Pacote Intermediário • Dobra suas chances</div>
+                        <div class="text-4xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-6">R$ 49,90</div>
+                        <button onclick="selectPackage('200', '49.90')" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-bold text-lg shadow-lg transform hover:scale-105">
+                            Comprar Agora
+                        </button>
+                        <div class="text-xs text-gray-500 mt-2">Entrega em até 30 minutos</div>
+                    </div>
+                </div>
+
+                <div class="premium-card relative rounded-2xl shadow-2xl p-8 card-hover border-4 border-yellow-400">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+                        ⭐ MAIS POPULAR ⭐
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl mb-4">🎫🎫🎫</div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">500 Bilhetes</h3>
+                        <div class="text-sm text-gray-600 mb-4">Pacote Premium • 5x mais chances</div>
+                        <div class="text-4xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-6">R$ 79,90</div>
+                        <button onclick="selectPackage('500', '79.90')" class="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-4 rounded-xl hover:from-yellow-500 hover:to-orange-600 transition-all duration-300 font-bold text-lg shadow-lg transform hover:scale-105">
+                            Comprar Agora
+                        </button>
+                        <div class="text-xs text-gray-500 mt-2">Entrega em até 30 minutos</div>
+                    </div>
+                </div>
+
+                <div class="premium-card relative rounded-2xl shadow-2xl p-8 card-hover">
+                    <div class="text-center">
+                        <div class="text-5xl mb-4">🎫🎫🎫🎫</div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">1000 Bilhetes</h3>
+                        <div class="text-sm text-gray-600 mb-4">Pacote VIP • Máximas chances</div>
+                        <div class="text-4xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-6">R$ 139,50</div>
+                        <button onclick="selectPackage('1000', '139.50')" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-bold text-lg shadow-lg transform hover:scale-105">
+                            Comprar Agora
+                        </button>
+                        <div class="text-xs text-gray-500 mt-2">Entrega em até 30 minutos</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Cards -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">⏰</div>
+                    <h3 class="text-xl font-bold mb-2">Entrega Rápida</h3>
+                    <p class="text-gray-600">Bilhetes enviados em até 30 minutos após a compra</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h3 class="text-xl font-bold mb-2">Pagamento Seguro</h3>
+                    <p class="text-gray-600">Mercado Pago - PIX, Cartão ou Boleto</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <h3 class="text-xl font-bold mb-2">Sorteios Semanais</h3>
+                    <p class="text-gray-600">Toda sexta-feira às 19h</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tickets Section -->
+        <section id="tickets" class="section-content hidden">
+            <h2 class="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">🎫 Bilhetes & Combos</h2>
+            <div class="max-w-7xl mx-auto">
+                <!-- Detailed Ticket Information -->
+                <div class="bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-2xl p-10 mb-12 border border-gray-200">
+                    <h3 class="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-green-500 to-blue-600 bg-clip-text text-transparent">📋 Detalhes dos Bilhetes</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="text-center p-6 bg-white rounded-2xl shadow-lg border border-gray-100">
+                            <div class="text-4xl mb-4">🎯</div>
+                            <h4 class="text-xl font-bold mb-3 text-gray-800">Formato dos Bilhetes</h4>
+                            <p class="text-gray-600 text-sm">Cada bilhete contém 6 números únicos de 01 a 60, gerados automaticamente pelo sistema</p>
+                        </div>
+                        <div class="text-center p-6 bg-white rounded-2xl shadow-lg border border-gray-100">
+                            <div class="text-4xl mb-4">🔢</div>
+                            <h4 class="text-xl font-bold mb-3 text-gray-800">Numeração</h4>
+                            <p class="text-gray-600 text-sm">Números de 01 a 60 • Sem repetição • Sequência aleatória garantida</p>
+                        </div>
+                        <div class="text-center p-6 bg-white rounded-2xl shadow-lg border border-gray-100">
+                            <div class="text-4xl mb-4">📧</div>
+                            <h4 class="text-xl font-bold mb-3 text-gray-800">Entrega Digital</h4>
+                            <p class="text-gray-600 text-sm">Bilhetes enviados em PDF por email em até 30 minutos após confirmação do pagamento</p>
+                        </div>
+                        <div class="text-center p-6 bg-white rounded-2xl shadow-lg border border-gray-100">
+                            <div class="text-4xl mb-4">🏆</div>
+                            <h4 class="text-xl font-bold mb-3 text-gray-800">Prêmio Mínimo</h4>
+                            <p class="text-gray-600 text-sm">R$ 10.000 garantidos toda sexta-feira às 19h • Valores podem ser maiores</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combos Grid -->
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Left Column - Combos -->
+                    <div class="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <h3 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Combos Disponíveis</h3>
+                        <div class="space-y-6">
+                            <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-purple-400 hover:bg-purple-50 cursor-pointer transition-all duration-300" onclick="selectPackage('100', '29.90')">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <div class="font-bold text-xl text-gray-800">100 Bilhetes</div>
+                                        <div class="text-sm text-gray-600">Combo Iniciante • Ideal para começar</div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-green-600">R$ 29,90</div>
+                                </div>
+                                <div class="text-xs text-gray-500 space-y-1">
+                                    <div>• 100 combinações únicas de 6 números</div>
+                                    <div>• Entrega em até 30 minutos</div>
+                                    <div>• Suporte completo incluso</div>
+                                </div>
+                            </div>
+
+                            <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-purple-400 hover:bg-purple-50 cursor-pointer transition-all duration-300" onclick="selectPackage('200', '49.90')">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <div class="font-bold text-xl text-gray-800">200 Bilhetes</div>
+                                        <div class="text-sm text-gray-600">Combo Intermediário • Dobra suas chances</div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-green-600">R$ 49,90</div>
+                                </div>
+                                <div class="text-xs text-gray-500 space-y-1">
+                                    <div>• 200 combinações únicas de 6 números</div>
+                                    <div>• Economia de R$ 9,90 vs individual</div>
+                                    <div>• Entrega prioritária</div>
+                                </div>
+                            </div>
+
+                            <div class="border-4 border-yellow-400 rounded-xl p-6 hover:border-yellow-500 hover:bg-yellow-50 cursor-pointer transition-all duration-300 relative" onclick="selectPackage('500', '79.90')">
+                                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg">
+                                    ⭐ MAIS POPULAR ⭐
+                                </div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <div class="font-bold text-xl text-gray-800">500 Bilhetes</div>
+                                        <div class="text-sm text-yellow-600 font-semibold">Combo Premium • 5x mais chances</div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-green-600">R$ 79,90</div>
+                                </div>
+                                <div class="text-xs text-gray-500 space-y-1">
+                                    <div>• 500 combinações únicas de 6 números</div>
+                                    <div>• Economia de R$ 69,60 vs individual</div>
+                                    <div>• Entrega super prioritária</div>
+                                </div>
+                            </div>
+
+                            <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-purple-400 hover:bg-purple-50 cursor-pointer transition-all duration-300" onclick="selectPackage('1000', '139.50')">
+                                <div class="flex justify-between items-center mb-3">
+                                    <div>
+                                        <div class="font-bold text-xl text-gray-800">1000 Bilhetes</div>
+                                        <div class="text-sm text-gray-600">Combo VIP • Máximas chances</div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-green-600">R$ 139,50</div>
+                                </div>
+                                <div class="text-xs text-gray-500 space-y-1">
+                                    <div>• 1000 combinações únicas de 6 números</div>
+                                    <div>• Economia de R$ 159,40 vs individual</div>
+                                    <div>• Atendimento VIP exclusivo</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - How it Works -->
+                    <div class="space-y-8">
+                        <div class="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl shadow-2xl p-8 text-white">
+                            <h3 class="text-3xl font-bold mb-8 text-center">Como Funciona</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-white text-purple-600 rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg shadow-lg">1</div>
+                                    <div>
+                                        <div class="font-bold text-lg">Escolha seu combo</div>
+                                        <div class="text-sm opacity-90">Selecione a quantidade de bilhetes que deseja</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-white text-purple-600 rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg shadow-lg">2</div>
+                                    <div>
+                                        <div class="font-bold text-lg">Faça o pagamento</div>
+                                        <div class="text-sm opacity-90">PIX, cartão de crédito ou débito</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-white text-purple-600 rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg shadow-lg">3</div>
+                                    <div>
+                                        <div class="font-bold text-lg">Receba seus bilhetes</div>
+                                        <div class="text-sm opacity-90">PDF com todos os números no seu email</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-white text-purple-600 rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg shadow-lg">4</div>
+                                    <div>
+                                        <div class="font-bold text-lg">Aguarde o sorteio</div>
+                                        <div class="text-sm opacity-90">Toda sexta-feira às 19h ao vivo</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ticket Sample -->
+                        <div class="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
+                            <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">📄 Exemplo de Bilhete</h3>
+                            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border-2 border-dashed border-gray-300">
+                                <div class="text-center mb-4">
+                                    <div class="font-bold text-lg text-purple-600">MEGA MILLIONS BRASIL</div>
+                                    <div class="text-sm text-gray-600">Bilhete #001234567</div>
+                                </div>
+                                <div class="grid grid-cols-6 gap-2 mb-4">
+                                    <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">07</div>
+                                    <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">14</div>
+                                    <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">23</div>
+                                    <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">31</div>
+                                    <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">45</div>
+                                    <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">58</div>
+                                </div>
+                                <div class="text-xs text-gray-500 text-center">
+                                    <div>Sorteio: 22/12/2023 às 19h</div>
+                                    <div>CNPJ: 63.173.859/0001-12</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advantages Section -->
+                <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl text-white p-8 mb-8">
+                    <h3 class="text-3xl font-bold text-center mb-8">🎯 Vantagens dos Nossos Bilhetes</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">🔒</div>
+                            <h4 class="text-xl font-bold mb-2">100% Seguro</h4>
+                            <p class="text-sm opacity-90">Todos os bilhetes são registrados e validados em nosso sistema</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">⚡</div>
+                            <h4 class="text-xl font-bold mb-2">Entrega Rápida</h4>
+                            <p class="text-sm opacity-90">Receba seus bilhetes em até 30 minutos após o pagamento</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">🎲</div>
+                            <h4 class="text-xl font-bold mb-2">Números Únicos</h4>
+                            <p class="text-sm opacity-90">Cada bilhete tem combinação exclusiva, sem repetições</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Financial Section -->
+        <section id="financial" class="section-content hidden">
+            <h2 class="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-green-500 to-blue-600 bg-clip-text text-transparent">💳 Área Financeira</h2>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Payment Methods -->
+                    <div class="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <h3 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Forma de Pagamento</h3>
+                        <div class="space-y-6">
+                            <div class="border-2 border-green-200 rounded-xl p-6 hover:border-green-400 transition-colors bg-gradient-to-r from-green-50 to-emerald-50">
+                                <div class="flex items-center space-x-4 mb-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="text-white font-bold text-lg">💳</span>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-xl text-gray-800">Mercado Pago</span>
+                                        <div class="text-sm text-green-600 font-semibold">PIX • Cartão • Boleto</div>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 mb-4">Escolha sua forma de pagamento no checkout • Aprovação rápida</p>
+                                <div class="bg-green-100 border border-green-300 rounded-lg p-4">
+                                    <div class="text-center">
+                                        <div class="text-sm font-semibold text-green-800 mb-2">Link de Pagamento:</div>
+                                        <div class="flex items-center justify-center space-x-2">
+                                            <a href="https://link.mercadopago.com.br/megamillionsbrasil" target="_blank" rel="noopener noreferrer" class="font-mono text-green-700 font-bold text-sm hover:text-green-800 underline">link.mercadopago.com.br/megamillionsbrasil</a>
+                                            <button onclick="copyToClipboard('link.mercadopago.com.br/megamillionsbrasil')" class="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700 transition-colors">
+                                                Copiar
+                                            </button>
+                                        </div>
+                                        <div class="text-xs text-green-600 mt-2">Clique no link para escolher PIX, Cartão ou Boleto</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payment Status Check -->
+                        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
+                            <h4 class="text-lg font-bold text-blue-800 mb-4">📋 Confirmar Pagamento</h4>
+                            <p class="text-sm text-blue-700 mb-4">Após realizar o pagamento no Mercado Pago, informe seus dados abaixo para confirmarmos sua compra:</p>
+                            <form onsubmit="submitPaymentConfirmation(event)" class="space-y-4">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <input type="text" id="confirmName" placeholder="Nome Completo" class="w-full border rounded-lg px-3 py-2 text-sm" required>
+                                    <input type="text" id="confirmCPF" placeholder="CPF" class="w-full border rounded-lg px-3 py-2 text-sm" required>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <input type="email" id="confirmEmail" placeholder="Email para receber bilhetes" class="w-full border rounded-lg px-3 py-2 text-sm" required>
+                                    <select id="confirmPackage" class="w-full border rounded-lg px-3 py-2 text-sm" required>
+                                        <option value="">Selecione o pacote comprado</option>
+                                        <option value="100-29.90">100 Bilhetes - R$ 29,90</option>
+                                        <option value="200-49.90">200 Bilhetes - R$ 49,90</option>
+                                        <option value="500-79.90">500 Bilhetes - R$ 79,90</option>
+                                        <option value="1000-139.50">1000 Bilhetes - R$ 139,50</option>
+                                    </select>
+                                </div>
+                                <textarea id="confirmTransactionId" placeholder="ID da transação ou últimos 4 dígitos do cartão (opcional)" class="w-full border rounded-lg px-3 py-2 text-sm h-20"></textarea>
+                                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                                    📤 Enviar Confirmação de Pagamento
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Purchase History -->
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold mb-6">Histórico de Compras</h3>
+                        <div id="purchaseHistory" class="space-y-3">
+                            <div class="text-center text-gray-500 py-8">
+                                <div class="text-4xl mb-2">📋</div>
+                                <p>Faça login para ver seu histórico</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="feedback" class="section-content hidden">
+            <h2 class="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">⭐ Depoimentos dos Ganhadores</h2>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="testimonial-card rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face" alt="Isabela Martins" class="w-16 h-16 rounded-full border-4 border-purple-300 shadow-lg object-cover">
+                            <div class="ml-4">
+                                <div class="font-bold text-lg text-gray-800">Isabela Martins</div>
+                                <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                                <div class="text-sm text-green-600 font-semibold">Ganhou R$ 47.200</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Ganhei no meu terceiro sorteio! O processo é super fácil e os bilhetes chegam rapidinho no email. Já paguei minha casa!"</p>
+                    </div>
+
+                    <div class="testimonial-card rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Eduardo Nascimento" class="w-16 h-16 rounded-full border-4 border-blue-300 shadow-lg object-cover">
+                            <div class="ml-4">
+                                <div class="font-bold text-lg text-gray-800">Eduardo Nascimento</div>
+                                <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                                <div class="text-sm text-green-600 font-semibold">Ganhou R$ 33.850</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Participo há 6 meses e já ganhei duas vezes! O atendimento é excelente e o pagamento é sempre certinho!"</p>
+                    </div>
+
+                    <div class="testimonial-card rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Rafaela Campos" class="w-16 h-16 rounded-full border-4 border-green-300 shadow-lg object-cover">
+                            <div class="ml-4">
+                                <div class="font-bold text-lg text-gray-800">Rafaela Campos</div>
+                                <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                                <div class="text-sm text-green-600 font-semibold">Ganhou R$ 29.400</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Plataforma muito confiável! Compro sempre o combo de 500 bilhetes. Já indiquei para toda minha família!"</p>
+                    </div>
+
+                    <div class="testimonial-card rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Thiago Barbosa" class="w-16 h-16 rounded-full border-4 border-red-300 shadow-lg object-cover">
+                            <div class="ml-4">
+                                <div class="font-bold text-lg text-gray-800">Thiago Barbosa</div>
+                                <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                                <div class="text-sm text-green-600 font-semibold">Ganhou R$ 41.600</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Ganhei no mês passado! O melhor é que o pagamento foi feito no mesmo dia do sorteio. Muito sério!"</p>
+                    </div>
+
+                    <div class="testimonial-card rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="Vanessa Rocha" class="w-16 h-16 rounded-full border-4 border-yellow-300 shadow-lg object-cover">
+                            <div class="ml-4">
+                                <div class="font-bold text-lg text-gray-800">Vanessa Rocha</div>
+                                <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                                <div class="text-sm text-green-600 font-semibold">Ganhou R$ 36.750</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Adoro participar! Mesmo quando não ganho o prêmio principal, sempre tem chances de ganhar prêmios menores!"</p>
+                    </div>
+
+                    <div class="testimonial-card rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" alt="Gabriel Mendes" class="w-16 h-16 rounded-full border-4 border-indigo-300 shadow-lg object-cover">
+                            <div class="ml-4">
+                                <div class="font-bold text-lg text-gray-800">Gabriel Mendes</div>
+                                <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                                <div class="text-sm text-green-600 font-semibold">Ganhou R$ 52.300</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Empresa séria e transparente. Os sorteios são ao vivo e você pode acompanhar tudo. Já sou cliente há 1 ano!"</p>
+                    </div>
+
+                    <div class="testimonial-card rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face" alt="Larissa Fernandes" class="w-16 h-16 rounded-full border-4 border-pink-300 shadow-lg object-cover">
+                            <div class="ml-4">
+                                <div class="font-bold text-lg text-gray-800">Larissa Fernandes</div>
+                                <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                                <div class="text-sm text-green-600 font-semibold">Ganhou R$ 28.900</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Participei do bolão premium e ganhamos! Dividimos o prêmio e todos ficaram felizes. Experiência incrível!"</p>
+                    </div>
+
+                    <div class="testimonial-card rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face" alt="Leonardo Silva" class="w-16 h-16 rounded-full border-4 border-teal-300 shadow-lg object-cover">
+                            <div class="ml-4">
+                                <div class="font-bold text-lg text-gray-800">Leonardo Silva</div>
+                                <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                                <div class="text-sm text-green-600 font-semibold">Ganhou R$ 44.100</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Comprei apenas 200 bilhetes e tive sorte! O processo de pagamento foi super rápido e seguro. Recomendo!"</p>
+                    </div>
+
+                    <div class="testimonial-card rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face" alt="Bianca Santos" class="w-16 h-16 rounded-full border-4 border-orange-300 shadow-lg object-cover">
+                            <div class="ml-4">
+                                <div class="font-bold text-lg text-gray-800">Bianca Santos</div>
+                                <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                                <div class="text-sm text-green-600 font-semibold">Ganhou R$ 39.650</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Sempre sonhei em ganhar na loteria! Agora posso realizar meus sonhos. Obrigada Mega Millions Brasil!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Winners Section -->
+        <section id="winners" class="section-content hidden">
+            <h2 class="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">🏆 Nossos Ganhadores</h2>
+            
+            <!-- Latest Winners -->
+            <div class="mb-16">
+                <h3 class="text-3xl font-bold text-center mb-8 text-gray-800">Últimos Ganhadores</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-green-500">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face" alt="Juliana Pereira" class="w-16 h-16 rounded-full border-4 border-green-300 shadow-lg object-cover">
+                            <div>
+                                <div class="font-bold text-lg">Juliana Pereira</div>
+                                <div class="text-green-600 font-semibold">Ganhou R$ 48.300</div>
+                                <div class="text-sm text-gray-500">15/12/2025</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">"Não acreditei quando vi o resultado! Comprei 500 bilhetes e ganhei! Já paguei minhas dívidas e ainda sobrou para investir."</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-blue-500">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face" alt="Ricardo Almeida" class="w-16 h-16 rounded-full border-4 border-blue-300 shadow-lg object-cover">
+                            <div>
+                                <div class="font-bold text-lg">Ricardo Almeida</div>
+                                <div class="text-blue-600 font-semibold">Ganhou R$ 35.750</div>
+                                <div class="text-sm text-gray-500">08/12/2025</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">"Terceira vez que participo e finalmente ganhei! O dinheiro caiu na conta no mesmo dia. Site muito confiável!"</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-purple-500">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face" alt="Beatriz Oliveira" class="w-16 h-16 rounded-full border-4 border-purple-300 shadow-lg object-cover">
+                            <div>
+                                <div class="font-bold text-lg">Beatriz Oliveira</div>
+                                <div class="text-purple-600 font-semibold">Ganhou R$ 42.100</div>
+                                <div class="text-sm text-gray-500">01/12/2025</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">"Participei do bolão com minha família e ganhamos! Dividimos o prêmio e todos ficaram felizes. Experiência incrível!"</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-orange-500">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face" alt="Marcos Ferreira" class="w-16 h-16 rounded-full border-4 border-orange-300 shadow-lg object-cover">
+                            <div>
+                                <div class="font-bold text-lg">Marcos Ferreira</div>
+                                <div class="text-orange-600 font-semibold">Ganhou R$ 31.800</div>
+                                <div class="text-sm text-gray-500">24/11/2025</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">"Comprei apenas 200 bilhetes e tive sorte! O processo de pagamento foi super rápido e seguro. Recomendo!"</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-teal-500">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=150&h=150&fit=crop&crop=face" alt="Priscila Costa" class="w-16 h-16 rounded-full border-4 border-teal-300 shadow-lg object-cover">
+                            <div>
+                                <div class="font-bold text-lg">Priscila Costa</div>
+                                <div class="text-teal-600 font-semibold">Ganhou R$ 26.400</div>
+                                <div class="text-sm text-gray-500">17/11/2025</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">"Sempre sonhei em ganhar na loteria! Agora posso realizar meus sonhos. Obrigada Mega Millions Brasil!"</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-pink-500">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671d66?w=150&h=150&fit=crop&crop=face" alt="André Rodrigues" class="w-16 h-16 rounded-full border-4 border-pink-300 shadow-lg object-cover">
+                            <div>
+                                <div class="font-bold text-lg">André Rodrigues</div>
+                                <div class="text-pink-600 font-semibold">Ganhou R$ 38.950</div>
+                                <div class="text-sm text-gray-500">10/11/2025</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">"Ganhei no meu aniversário! Que presente incrível. O atendimento é excelente e tudo muito transparente."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-8 text-white mb-16">
+                <h3 class="text-3xl font-bold text-center mb-8">Estatísticas dos Ganhadores</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">2.847</div>
+                        <div class="text-lg">Ganhadores Total</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">R$ 8.2M</div>
+                        <div class="text-lg">Prêmios Pagos</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">156</div>
+                        <div class="text-lg">Ganhadores Este Mês</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">R$ 45.000</div>
+                        <div class="text-lg">Maior Prêmio</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bolão Section -->
+        <section id="bolao" class="section-content hidden">
+            <h2 class="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">🤝 Bolões da Mega Millions</h2>
+            <div class="max-w-6xl mx-auto">
+                <!-- Featured Bolão -->
+                <div class="bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-3xl text-white p-10 mb-12 shadow-2xl relative overflow-hidden">
+                    <div class="absolute inset-0 bg-black opacity-10"></div>
+                    <div class="relative z-10">
+                        <div class="text-center mb-8">
+                            <div class="text-6xl mb-4">🏆</div>
+                            <h3 class="text-4xl font-bold mb-4">BOLÃO PREMIUM - 4.200 BILHETES</h3>
+                            <p class="text-2xl mb-6">Máximas chances de ganhar! Junte-se a outros apostadores!</p>
+                            <div class="bg-white bg-opacity-20 rounded-2xl p-6 inline-block backdrop-blur-sm">
+                                <div class="text-3xl font-bold mb-2">R$ 85,00 por cota</div>
+                                <div class="text-lg">Mínimo 5 cotas • Máximo 100 cotas</div>
+                                <div class="text-sm mt-2">Sorteio: Sexta-feira às 19h</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Participants Counter -->
+                        <div class="grid md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center backdrop-blur-sm">
+                                <div class="text-2xl font-bold">847</div>
+                                <div class="text-sm">Cotas Vendidas</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center backdrop-blur-sm">
+                                <div class="text-2xl font-bold">153</div>
+                                <div class="text-sm">Cotas Restantes</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center backdrop-blur-sm">
+                                <div class="text-2xl font-bold">284</div>
+                                <div class="text-sm">Participantes</div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button onclick="selectBolao('4200', '85.00', '5', '100')" class="bg-white text-orange-600 px-12 py-4 rounded-2xl font-bold text-xl hover:bg-gray-100 transition-all duration-300 shadow-lg transform hover:scale-105">
+                                PARTICIPAR AGORA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Section -->
+                <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl text-white p-8 mb-8">
+                    <div class="text-center">
+                        <h3 class="text-3xl font-bold mb-4">🤝 Jogue em Grupo e Multiplique suas Chances!</h3>
+                        <p class="text-xl mb-6">Um Bolão é uma forma de jogar onde você se junta a outros participantes e divide tanto os custos quanto os prêmios. É a melhor opção para aumentar suas chances de ganhar!</p>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-4 inline-block">
+                            <div class="text-2xl font-bold">Próximo Sorteio: R$ 10.000+</div>
+                            <div class="text-sm">Sexta-feira às 19h</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Como Funciona -->
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold mb-6">Como Funciona</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-100 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">1</div>
+                                <div>
+                                    <div class="font-semibold">Escolha sua Cota</div>
+                                    <div class="text-sm text-gray-600">Selecione quantas cotas deseja comprar no bolão</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-100 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">2</div>
+                                <div>
+                                    <div class="font-semibold">Divida os Custos</div>
+                                    <div class="text-sm text-gray-600">O valor total é dividido entre todos os participantes</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-100 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">3</div>
+                                <div>
+                                    <div class="font-semibold">Compartilhe o Prêmio</div>
+                                    <div class="text-sm text-gray-600">Qualquer prêmio é dividido igualmente entre as cotas</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-purple-100 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">4</div>
+                                <div>
+                                    <div class="font-semibold">Celebre Junto</div>
+                                    <div class="text-sm text-gray-600">Ganhe e comemore com outros participantes!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold mb-6">Vantagens do Bolão</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">📈</div>
+                                <div>
+                                    <div class="font-semibold">Mais Chances</div>
+                                    <div class="text-sm text-gray-600">Mais bilhetes = mais chances de ganhar</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">💰</div>
+                                <div>
+                                    <div class="font-semibold">Menor Custo</div>
+                                    <div class="text-sm text-gray-600">Divida o investimento com outros</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">👥</div>
+                                <div>
+                                    <div class="font-semibold">Experiência Social</div>
+                                    <div class="text-sm text-gray-600">Jogue com amigos e família</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="text-2xl">🏆</div>
+                                <div>
+                                    <div class="font-semibold">Prêmios Garantidos</div>
+                                    <div class="text-sm text-gray-600">Mesmo dividido, ainda é muito dinheiro!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bolões Disponíveis -->
+                <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8 border border-gray-200">
+                    <h3 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Bolões Disponíveis</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-gradient-to-r from-gray-50 to-gray-100 border-b-2 border-gray-200">
+                                    <th class="text-left py-4 px-4 font-bold text-gray-700">Bilhetes</th>
+                                    <th class="text-left py-4 px-4 font-bold text-gray-700">Descrição</th>
+                                    <th class="text-left py-4 px-4 font-bold text-gray-700">Cotas</th>
+                                    <th class="text-left py-4 px-4 font-bold text-gray-700">Valor/Cota</th>
+                                    <th class="text-left py-4 px-4 font-bold text-gray-700">Investimento</th>
+                                    <th class="text-left py-4 px-4 font-bold text-gray-700">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b hover:bg-gray-50 transition-colors">
+                                    <td class="py-4 px-4 font-semibold">100</td>
+                                    <td class="py-4 px-4 text-sm text-gray-600">Bolão Iniciante • Ideal para começar</td>
+                                    <td class="py-4 px-4">2 a 10</td>
+                                    <td class="py-4 px-4 font-bold text-green-600">R$ 15,00</td>
+                                    <td class="py-4 px-4 text-sm">R$ 30 - R$ 150</td>
+                                    <td class="py-4 px-4">
+                                        <button onclick="selectBolao('100', '15.00', '2', '10')" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 text-sm font-semibold shadow-lg">
+                                            Participar
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b hover:bg-gray-50 transition-colors">
+                                    <td class="py-4 px-4 font-semibold">250</td>
+                                    <td class="py-4 px-4 text-sm text-gray-600">Bolão Intermediário • Boas chances</td>
+                                    <td class="py-4 px-4">2 a 25</td>
+                                    <td class="py-4 px-4 font-bold text-green-600">R$ 20,00</td>
+                                    <td class="py-4 px-4 text-sm">R$ 40 - R$ 500</td>
+                                    <td class="py-4 px-4">
+                                        <button onclick="selectBolao('250', '20.00', '2', '25')" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 text-sm font-semibold shadow-lg">
+                                            Participar
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b bg-gradient-to-r from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100 transition-colors">
+                                    <td class="py-4 px-4 font-semibold">500 ⭐</td>
+                                    <td class="py-4 px-4 text-sm text-orange-700 font-semibold">Bolão Popular • Mais escolhido</td>
+                                    <td class="py-4 px-4">2 a 50</td>
+                                    <td class="py-4 px-4 font-bold text-green-600">R$ 25,00</td>
+                                    <td class="py-4 px-4 text-sm">R$ 50 - R$ 1.250</td>
+                                    <td class="py-4 px-4">
+                                        <button onclick="selectBolao('500', '25.00', '2', '50')" class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-6 py-2 rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all duration-300 text-sm font-bold shadow-lg">
+                                            Participar
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b hover:bg-gray-50 transition-colors">
+                                    <td class="py-4 px-4 font-s
