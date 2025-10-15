@@ -214,7 +214,7 @@
                 <div class="bg-white rounded-xl shadow-lg p-6 text-center">
                     <div class="text-4xl mb-4">🔒</div>
                     <h3 class="text-xl font-bold mb-2">Pagamento Seguro</h3>
-                    <p class="text-gray-600">PIX, Cartão de Crédito ou Débito</p>
+                    <p class="text-gray-600">Mercado Pago - PIX, Cartão ou Boleto</p>
                 </div>
                 <div class="bg-white rounded-xl shadow-lg p-6 text-center">
                     <div class="text-4xl mb-4">🏆</div>
@@ -379,7 +379,7 @@
                                     <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">58</div>
                                 </div>
                                 <div class="text-xs text-gray-500 text-center">
-                                    <div>Sorteio: 22/12/2024 às 19h</div>
+                                    <div>Sorteio: 22/12/2023 às 19h</div>
                                     <div>CNPJ: 63.173.859/0001-12</div>
                                 </div>
                             </div>
@@ -418,50 +418,58 @@
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Payment Methods -->
                     <div class="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
-                        <h3 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Formas de Pagamento</h3>
+                        <h3 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Forma de Pagamento</h3>
                         <div class="space-y-6">
                             <div class="border-2 border-green-200 rounded-xl p-6 hover:border-green-400 transition-colors bg-gradient-to-r from-green-50 to-emerald-50">
                                 <div class="flex items-center space-x-4 mb-4">
                                     <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                                        <span class="text-white font-bold text-lg">P</span>
-                                    </div>
-                                    <div>
-                                        <span class="font-bold text-xl text-gray-800">PIX</span>
-                                        <div class="text-sm text-green-600 font-semibold">Pagamento Instantâneo</div>
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 mb-4">Aprovação imediata • Bilhetes em até 30 minutos</p>
-                                <div class="bg-green-100 border border-green-300 rounded-lg p-4">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-sm font-semibold text-green-800">CNPJ:</span>
-                                        <div class="flex items-center space-x-2">
-                                            <span class="font-mono text-green-700 font-bold">63.173.859/0001-12</span>
-                                            <button onclick="copyToClipboard('63.173.859/0001-12')" class="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700 transition-colors">
-                                                Copiar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="border-2 border-blue-200 rounded-xl p-6 hover:border-blue-400 transition-colors bg-gradient-to-r from-blue-50 to-indigo-50">
-                                <div class="flex items-center space-x-4 mb-4">
-                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg">
                                         <span class="text-white font-bold text-lg">💳</span>
                                     </div>
                                     <div>
-                                        <span class="font-bold text-xl text-gray-800">Cartão de Crédito/Débito</span>
-                                        <div class="text-sm text-blue-600 font-semibold">Todas as Bandeiras</div>
+                                        <span class="font-bold text-xl text-gray-800">Mercado Pago</span>
+                                        <div class="text-sm text-green-600 font-semibold">PIX • Cartão • Boleto</div>
                                     </div>
                                 </div>
-                                <p class="text-gray-600 mb-4">Visa • Mastercard • Elo • American Express • Hipercard</p>
-                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-4 mb-4">
-                                    <div class="text-sm font-semibold text-blue-800">CNPJ: 63.173.859/0001-12</div>
+                                <p class="text-gray-600 mb-4">Escolha sua forma de pagamento no checkout • Aprovação rápida</p>
+                                <div class="bg-green-100 border border-green-300 rounded-lg p-4">
+                                    <div class="text-center">
+                                        <div class="text-sm font-semibold text-green-800 mb-2">Link de Pagamento:</div>
+                                        <div class="flex items-center justify-center space-x-2">
+                                            <a href="https://link.mercadopago.com.br/megamillionsbrasil" target="_blank" rel="noopener noreferrer" class="font-mono text-green-700 font-bold text-sm hover:text-green-800 underline">link.mercadopago.com.br/megamillionsbrasil</a>
+                                            <button onclick="copyToClipboard('link.mercadopago.com.br/megamillionsbrasil')" class="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700 transition-colors">
+                                                Copiar
+                                            </button>
+                                        </div>
+                                        <div class="text-xs text-green-600 mt-2">Clique no link para escolher PIX, Cartão ou Boleto</div>
+                                    </div>
                                 </div>
-                                <button onclick="showCardForm()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold shadow-lg">
-                                    Cadastrar Cartão
-                                </button>
                             </div>
+                        </div>
+                        
+                        <!-- Payment Status Check -->
+                        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
+                            <h4 class="text-lg font-bold text-blue-800 mb-4">📋 Confirmar Pagamento</h4>
+                            <p class="text-sm text-blue-700 mb-4">Após realizar o pagamento no Mercado Pago, informe seus dados abaixo para confirmarmos sua compra:</p>
+                            <form onsubmit="submitPaymentConfirmation(event)" class="space-y-4">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <input type="text" id="confirmName" placeholder="Nome Completo" class="w-full border rounded-lg px-3 py-2 text-sm" required>
+                                    <input type="text" id="confirmCPF" placeholder="CPF" class="w-full border rounded-lg px-3 py-2 text-sm" required>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <input type="email" id="confirmEmail" placeholder="Email para receber bilhetes" class="w-full border rounded-lg px-3 py-2 text-sm" required>
+                                    <select id="confirmPackage" class="w-full border rounded-lg px-3 py-2 text-sm" required>
+                                        <option value="">Selecione o pacote comprado</option>
+                                        <option value="100-29.90">100 Bilhetes - R$ 29,90</option>
+                                        <option value="200-49.90">200 Bilhetes - R$ 49,90</option>
+                                        <option value="500-79.90">500 Bilhetes - R$ 79,90</option>
+                                        <option value="1000-139.50">1000 Bilhetes - R$ 139,50</option>
+                                    </select>
+                                </div>
+                                <textarea id="confirmTransactionId" placeholder="ID da transação ou últimos 4 dígitos do cartão (opcional)" class="w-full border rounded-lg px-3 py-2 text-sm h-20"></textarea>
+                                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                                    📤 Enviar Confirmação de Pagamento
+                                </button>
+                            </form>
                         </div>
                     </div>
 
@@ -477,66 +485,7 @@
                     </div>
                 </div>
 
-                <!-- Card Registration Form -->
-                <div id="cardForm" class="hidden mt-8 bg-white rounded-xl shadow-lg p-8">
-                    <h3 class="text-2xl font-bold mb-6">Cadastrar Cartão</h3>
-                    <form onsubmit="saveCard(event)" class="space-y-4">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Nome no Cartão</label>
-                                <input type="text" class="w-full border rounded-lg px-3 py-2" placeholder="Nome completo" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Número do Cartão</label>
-                                <input type="text" class="w-full border rounded-lg px-3 py-2" placeholder="0000 0000 0000 0000" maxlength="19" required>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Mês</label>
-                                <select class="w-full border rounded-lg px-3 py-2" required>
-                                    <option value="">MM</option>
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                    <option value="03">03</option>
-                                    <option value="04">04</option>
-                                    <option value="05">05</option>
-                                    <option value="06">06</option>
-                                    <option value="07">07</option>
-                                    <option value="08">08</option>
-                                    <option value="09">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Ano</label>
-                                <select class="w-full border rounded-lg px-3 py-2" required>
-                                    <option value="">AAAA</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
-                                    <option value="2027">2027</option>
-                                    <option value="2028">2028</option>
-                                    <option value="2029">2029</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">CVV</label>
-                                <input type="text" class="w-full border rounded-lg px-3 py-2" placeholder="000" maxlength="4" required>
-                            </div>
-                        </div>
-                        <div class="flex space-x-4">
-                            <button type="submit" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-                                Salvar Cartão
-                            </button>
-                            <button type="button" onclick="hideCardForm()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition-colors">
-                                Cancelar
-                            </button>
-                        </div>
-                    </form>
-                </div>
+
             </div>
         </section>
 
@@ -670,7 +619,7 @@
                             <div>
                                 <div class="font-bold text-lg">Juliana Pereira</div>
                                 <div class="text-green-600 font-semibold">Ganhou R$ 48.300</div>
-                                <div class="text-sm text-gray-500">15/12/2024</div>
+                                <div class="text-sm text-gray-500">15/12/2025</div>
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm">"Não acreditei quando vi o resultado! Comprei 500 bilhetes e ganhei! Já paguei minhas dívidas e ainda sobrou para investir."</p>
@@ -682,7 +631,7 @@
                             <div>
                                 <div class="font-bold text-lg">Ricardo Almeida</div>
                                 <div class="text-blue-600 font-semibold">Ganhou R$ 35.750</div>
-                                <div class="text-sm text-gray-500">08/12/2024</div>
+                                <div class="text-sm text-gray-500">08/12/2025</div>
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm">"Terceira vez que participo e finalmente ganhei! O dinheiro caiu na conta no mesmo dia. Site muito confiável!"</p>
@@ -694,7 +643,7 @@
                             <div>
                                 <div class="font-bold text-lg">Beatriz Oliveira</div>
                                 <div class="text-purple-600 font-semibold">Ganhou R$ 42.100</div>
-                                <div class="text-sm text-gray-500">01/12/2024</div>
+                                <div class="text-sm text-gray-500">01/12/2025</div>
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm">"Participei do bolão com minha família e ganhamos! Dividimos o prêmio e todos ficaram felizes. Experiência incrível!"</p>
@@ -706,7 +655,7 @@
                             <div>
                                 <div class="font-bold text-lg">Marcos Ferreira</div>
                                 <div class="text-orange-600 font-semibold">Ganhou R$ 31.800</div>
-                                <div class="text-sm text-gray-500">24/11/2024</div>
+                                <div class="text-sm text-gray-500">24/11/2025</div>
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm">"Comprei apenas 200 bilhetes e tive sorte! O processo de pagamento foi super rápido e seguro. Recomendo!"</p>
@@ -718,7 +667,7 @@
                             <div>
                                 <div class="font-bold text-lg">Priscila Costa</div>
                                 <div class="text-teal-600 font-semibold">Ganhou R$ 26.400</div>
-                                <div class="text-sm text-gray-500">17/11/2024</div>
+                                <div class="text-sm text-gray-500">17/11/2025</div>
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm">"Sempre sonhei em ganhar na loteria! Agora posso realizar meus sonhos. Obrigada Mega Millions Brasil!"</p>
@@ -730,7 +679,7 @@
                             <div>
                                 <div class="font-bold text-lg">André Rodrigues</div>
                                 <div class="text-pink-600 font-semibold">Ganhou R$ 38.950</div>
-                                <div class="text-sm text-gray-500">10/11/2024</div>
+                                <div class="text-sm text-gray-500">10/11/2025</div>
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm">"Ganhei no meu aniversário! Que presente incrível. O atendimento é excelente e tudo muito transparente."</p>
@@ -1022,8 +971,9 @@
                                     <span class="text-purple-600">📧</span>
                                 </div>
                                 <div>
-                                    <div class="font-semibold">Email</div>
+                                    <div class="font-semibold">Email de Suporte</div>
                                     <div class="text-gray-600">megamillionbrasil@gmail.com</div>
+                                    <div class="text-xs text-blue-600 mt-1">Para problemas, dúvidas ou suporte técnico</div>
                                 </div>
                             </div>
                             <div class="flex items-center space-x-3">
@@ -1265,65 +1215,25 @@
     </div>
 
     <!-- Purchase Modal -->
-    <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-xl shadow-2xl p-4 max-w-sm w-full max-h-[85vh] overflow-y-auto">
-            <h3 class="text-lg font-bold mb-3 text-center text-purple-600">🎫 Finalizar Compra</h3>
+    <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-2">
+        <div class="bg-white rounded-lg shadow-2xl p-3 w-full max-w-xs max-h-[90vh] overflow-y-auto">
+            <h3 class="text-base font-bold mb-2 text-center text-purple-600">🎫 Finalizar Compra</h3>
             
-            <div id="purchaseDetails" class="bg-purple-50 rounded-lg p-3 mb-3 text-center">
+            <div id="purchaseDetails" class="bg-purple-50 rounded p-2 mb-2 text-center text-sm">
                 <!-- Purchase details will be inserted here -->
             </div>
 
-            <div class="mb-3">
-                <h4 class="text-sm font-bold mb-2">💳 Forma de Pagamento</h4>
+            <div class="text-center">
+                <p class="text-sm text-purple-600 mb-4">Para comprar este pacote, acesse o link de pagamento na seção Financeiro e depois confirme sua compra.</p>
                 <div class="space-y-2">
-                    <label class="flex items-center space-x-2 cursor-pointer p-2 border rounded-lg hover:bg-green-50">
-                        <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4">
-                        <span class="text-sm font-semibold">PIX - Instantâneo</span>
-                    </label>
-                    <label class="flex items-center space-x-2 cursor-pointer p-2 border rounded-lg hover:bg-blue-50">
-                        <input type="radio" name="paymentMethod" value="card" class="w-4 h-4">
-                        <span class="text-sm font-semibold">Cartão de Crédito/Débito</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- PIX Details (hidden by default) -->
-            <div id="pixDetails" class="hidden mb-3 bg-green-50 p-3 rounded-lg">
-                <div class="text-center">
-                    <div class="text-sm font-bold mb-2">Chave PIX (CNPJ):</div>
-                    <div class="bg-white p-2 rounded border font-mono text-sm">63.173.859/0001-12</div>
-                    <button type="button" onclick="copyPixKey()" class="mt-2 bg-green-600 text-white px-3 py-1 rounded text-xs">Copiar Chave</button>
-                </div>
-            </div>
-
-            <!-- Card Details (hidden by default) -->
-            <div id="cardDetails" class="hidden mb-3 space-y-2">
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="cardNumber" placeholder="Número do Cartão" class="border rounded px-2 py-1 text-sm">
-                    <input type="text" id="cardName" placeholder="Nome no Cartão" class="border rounded px-2 py-1 text-sm">
-                </div>
-                <div class="grid grid-cols-3 gap-2">
-                    <input type="text" id="cardExpiry" placeholder="MM/AA" class="border rounded px-2 py-1 text-sm">
-                    <input type="text" id="cardCVV" placeholder="CVV" class="border rounded px-2 py-1 text-sm">
-                </div>
-            </div>
-
-            <form onsubmit="processPurchase(event)" class="space-y-2">
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="buyerName" placeholder="Nome Completo" class="border rounded px-2 py-2 text-sm" required>
-                    <input type="text" id="buyerCPF" placeholder="CPF" class="border rounded px-2 py-2 text-sm" required>
-                </div>
-                <input type="email" id="buyerEmail" placeholder="Email para receber bilhetes" class="w-full border rounded px-2 py-2 text-sm" required>
-                
-                <div class="flex space-x-2 pt-2">
-                    <button type="submit" class="flex-1 bg-purple-600 text-white py-2 rounded font-bold text-sm">
-                        Confirmar
+                    <button onclick="showSection('financial')" class="w-full bg-purple-600 text-white py-2 rounded font-bold text-xs">
+                        Ir para Pagamento
                     </button>
-                    <button type="button" onclick="closePurchaseModal()" class="flex-1 bg-gray-400 text-white py-2 rounded text-sm">
-                        Cancelar
+                    <button type="button" onclick="closePurchaseModal()" class="w-full bg-gray-400 text-white py-2 rounded text-xs">
+                        Fechar
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -1353,59 +1263,16 @@
                     </div>
                 </div>
 
-                <div class="space-y-6 mb-8">
-                    <h4 class="text-lg font-bold text-gray-800 border-b-2 border-gray-200 pb-2">💳 Forma de Pagamento</h4>
-                    <div class="space-y-3">
-                        <label class="flex items-center space-x-3 cursor-pointer p-3 border-2 border-gray-200 rounded-xl hover:border-green-400 hover:bg-green-50 transition-all duration-300">
-                            <input type="radio" name="bolaoPaymentMethod" value="pix" class="text-green-600 w-5 h-5">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                    <span class="text-green-600 font-bold text-sm">P</span>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-800">PIX</div>
-                                    <div class="text-xs text-green-600">Aprovação instantânea</div>
-                                </div>
-                            </div>
-                        </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-3 border-2 border-gray-200 rounded-xl hover:border-blue-400 hover:bg-blue-50 transition-all duration-300">
-                            <input type="radio" name="bolaoPaymentMethod" value="card" class="text-blue-600 w-5 h-5">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <span class="text-blue-600 font-bold text-sm">💳</span>
-                                </div>
-                                <div>
-                                    <div class="font-semibold text-gray-800">Cartão de Crédito/Débito</div>
-                                    <div class="text-xs text-blue-600">Todas as bandeiras aceitas</div>
-                                </div>
-                            </div>
-                        </label>
+                <div class="text-center">
+                    <p class="text-lg text-purple-600 mb-6">Para participar deste bolão, acesse o link de pagamento na seção Financeiro e depois confirme sua participação.</p>
+                    <div class="space-y-4">
+                        <button onclick="showSection('financial'); closeBolaoModal();" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-bold text-lg shadow-lg">
+                            💳 Ir para Pagamento
+                        </button>
+                        <button type="button" onclick="closeBolaoModal()" class="w-full bg-gradient-to-r from-gray-400 to-gray-500 text-white py-4 rounded-xl hover:from-gray-500 hover:to-gray-600 transition-all duration-300 font-semibold">
+                            Fechar
+                        </button>
                     </div>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-semibold mb-3 text-gray-700">Nome Completo</label>
-                        <input type="text" id="bolaoBuyerName" class="w-full border-2 border-gray-300 rounded-xl px-4 py-3 focus:border-purple-500 focus:outline-none transition-colors" placeholder="Seu nome completo" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-3 text-gray-700">CPF</label>
-                        <input type="text" id="bolaoBuyerCPF" class="w-full border-2 border-gray-300 rounded-xl px-4 py-3 focus:border-purple-500 focus:outline-none transition-colors" placeholder="000.000.000-00" required>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold mb-3 text-gray-700">Email para Recebimento dos Bilhetes</label>
-                    <input type="email" id="bolaoBuyerEmail" class="w-full border-2 border-gray-300 rounded-xl px-4 py-3 focus:border-purple-500 focus:outline-none transition-colors" placeholder="seu@email.com" required>
-                    <div class="text-xs text-gray-500 mt-2">📧 Comprovante do bolão será enviado para este email</div>
-                </div>
-                
-                <div class="flex space-x-4 pt-4">
-                    <button type="submit" class="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-bold text-lg shadow-lg transform hover:scale-105">
-                        🤝 Confirmar Participação
-                    </button>
-                    <button type="button" onclick="closeBolaoModal()" class="flex-1 bg-gradient-to-r from-gray-400 to-gray-500 text-white py-4 rounded-xl hover:from-gray-500 hover:to-gray-600 transition-all duration-300 font-semibold">
-                        Cancelar
-                    </button>
                 </div>
             </form>
         </div>
@@ -1577,10 +1444,90 @@
         // Copy to clipboard function
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                showMessage('CNPJ copiado para a área de transferência!', 'success');
+                showMessage('Link copiado para a área de transferência!', 'success');
             }).catch(() => {
-                showMessage('Erro ao copiar CNPJ', 'error');
+                showMessage('Erro ao copiar link', 'error');
             });
+        }
+
+        // Payment confirmation function
+        function submitPaymentConfirmation(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('confirmName').value;
+            const cpf = document.getElementById('confirmCPF').value;
+            const email = document.getElementById('confirmEmail').value;
+            const packageInfo = document.getElementById('confirmPackage').value;
+            const transactionId = document.getElementById('confirmTransactionId').value;
+            
+            if (!packageInfo) {
+                showMessage('Selecione o pacote comprado', 'error');
+                return;
+            }
+            
+            const [tickets, price] = packageInfo.split('-');
+            
+            // Create pending purchase record
+            const purchase = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString('pt-BR'),
+                time: new Date().toLocaleTimeString('pt-BR'),
+                name: name,
+                email: email,
+                cpf: cpf,
+                tickets: tickets,
+                price: price,
+                transactionId: transactionId || 'Não informado',
+                paymentMethod: 'Mercado Pago',
+                status: 'Aguardando Confirmação'
+            };
+
+            // Save to localStorage
+            salesData.push(purchase);
+            localStorage.setItem('megaMillionsSales', JSON.stringify(salesData));
+
+            // Send email notification to admin
+            sendAdminNotification(purchase);
+
+            // Clear form
+            event.target.reset();
+            
+            // Show success message
+            showMessage('Confirmação enviada! Verificaremos seu pagamento e enviaremos os bilhetes em breve.', 'success');
+            
+            // Update admin dashboard
+            updateAdminDashboard();
+        }
+
+        function sendAdminNotification(purchaseData) {
+            // In a real application, this would send an actual email
+            // For now, we'll simulate the email sending
+            console.log('Email enviado para laraempresaferreira@gmail.com:', purchaseData);
+            
+            // Simulate email content
+            const emailContent = `
+                NOVA CONFIRMAÇÃO DE PAGAMENTO RECEBIDA!
+                
+                ===== DADOS DO CLIENTE =====
+                Nome: ${purchaseData.name}
+                CPF: ${purchaseData.cpf}
+                Email: ${purchaseData.email}
+                
+                ===== DADOS DA COMPRA =====
+                Pacote: ${purchaseData.tickets} bilhetes
+                Valor: R$ ${purchaseData.price}
+                ID Transação: ${purchaseData.transactionId}
+                Data/Hora: ${purchaseData.date} ${purchaseData.time}
+                
+                ===== AÇÕES NECESSÁRIAS =====
+                1. Verificar pagamento no Mercado Pago
+                2. Se aprovado, enviar pack para: ${purchaseData.email}
+                3. Confirmar recebimento com o cliente
+                
+                Link Mercado Pago: link.mercadopago.com.br/megamillionsbrasil
+            `;
+            
+            return true; // Simulate successful email sending
         }
 
         // Login functionality
@@ -1668,13 +1615,12 @@
             const details = document.getElementById('purchaseDetails');
             
             details.innerHTML = `
-                <div class="text-center">
-                    <div class="text-2xl font-bold text-gray-800 mb-2">${selectedPackage.tickets} Bilhetes</div>
-                    <div class="text-4xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-3">R$ ${selectedPackage.price}</div>
-                    <div class="text-sm text-gray-600 space-y-1">
-                        <div>🎯 Sorteio: Sexta-feira às 19h</div>
-                        <div>📧 Entrega em até 30 minutos</div>
-                        <div>🏢 CNPJ: 63.173.859/0001-12</div>
+                <div>
+                    <div class="text-base font-bold text-gray-800 mb-1">${selectedPackage.tickets} Bilhetes</div>
+                    <div class="text-2xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-2">R$ ${selectedPackage.price}</div>
+                    <div class="text-xs text-gray-600 space-y-1">
+                        <div>🎯 Sorteio: Sexta às 19h</div>
+                        <div>📧 Entrega em 30min</div>
                     </div>
                 </div>
             `;
@@ -1688,140 +1634,9 @@
             document.getElementById('purchaseModal').classList.remove('flex');
         }
 
-        // Payment method selection handlers
-        document.addEventListener('change', function(e) {
-            if (e.target.name === 'paymentMethod') {
-                const pixDetails = document.getElementById('pixDetails');
-                const cardDetails = document.getElementById('cardDetails');
-                
-                if (e.target.value === 'pix') {
-                    pixDetails.classList.remove('hidden');
-                    cardDetails.classList.add('hidden');
-                } else if (e.target.value === 'card') {
-                    cardDetails.classList.remove('hidden');
-                    pixDetails.classList.add('hidden');
-                }
-            }
-        });
+        // Payment method selection handlers - Mercado Pago only
 
-        function copyPixKey() {
-            navigator.clipboard.writeText('63.173.859/0001-12').then(() => {
-                showMessage('Chave PIX copiada!', 'success');
-            });
-        }
 
-        function generatePaymentCode() {
-            return Math.random().toString(36).substr(2, 8).toUpperCase();
-        }
-
-        function simulatePaymentVerification(paymentMethod, paymentCode) {
-            return new Promise((resolve) => {
-                // Simulate payment verification delay
-                setTimeout(() => {
-                    // 90% success rate for simulation
-                    const success = Math.random() > 0.1;
-                    resolve(success);
-                }, 2000);
-            });
-        }
-
-        function sendEmailNotification(purchaseData) {
-            // In a real application, this would send an actual email
-            // For now, we'll simulate the email sending
-            console.log('Email enviado para laraempresaferreira@gmail.com:', purchaseData);
-            
-            // Simulate email content
-            const emailContent = `
-                Nova Compra Realizada!
-                
-                Cliente: ${purchaseData.name}
-                Email: ${purchaseData.email}
-                CPF: ${purchaseData.cpf}
-                Bilhetes: ${purchaseData.tickets}
-                Valor: R$ ${purchaseData.price}
-                Pagamento: ${purchaseData.paymentMethod}
-                Código: ${purchaseData.paymentCode}
-                Data: ${purchaseData.date}
-                
-                Enviar pack para: ${purchaseData.email}
-            `;
-            
-            return true; // Simulate successful email sending
-        }
-
-        async function processPurchase(event) {
-            event.preventDefault();
-            
-            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
-            if (!paymentMethod) {
-                showMessage('Selecione uma forma de pagamento', 'error');
-                return;
-            }
-
-            const name = document.getElementById('buyerName').value;
-            const email = document.getElementById('buyerEmail').value;
-            const cpf = document.getElementById('buyerCPF').value;
-
-            // Validate card details if card payment
-            if (paymentMethod.value === 'card') {
-                const cardNumber = document.getElementById('cardNumber').value;
-                const cardName = document.getElementById('cardName').value;
-                const cardExpiry = document.getElementById('cardExpiry').value;
-                const cardCVV = document.getElementById('cardCVV').value;
-
-                if (!cardNumber || !cardName || !cardExpiry || !cardCVV) {
-                    showMessage('Preencha todos os dados do cartão', 'error');
-                    return;
-                }
-            }
-
-            // Generate payment verification code
-            const paymentCode = generatePaymentCode();
-            
-            // Show processing message
-            showMessage('Processando pagamento...', 'info');
-            
-            try {
-                // Simulate payment verification
-                const paymentApproved = await simulatePaymentVerification(paymentMethod.value, paymentCode);
-                
-                if (!paymentApproved) {
-                    showMessage('Pagamento não aprovado. Tente novamente.', 'error');
-                    return;
-                }
-
-                // Create purchase record
-                const purchase = {
-                    id: Date.now(),
-                    date: new Date().toLocaleDateString('pt-BR'),
-                    time: new Date().toLocaleTimeString('pt-BR'),
-                    name: name,
-                    email: email,
-                    cpf: cpf,
-                    tickets: selectedPackage.tickets,
-                    price: selectedPackage.price,
-                    paymentMethod: paymentMethod.value === 'pix' ? 'PIX' : 'Cartão',
-                    paymentCode: paymentCode,
-                    status: 'Aprovado'
-                };
-
-                // Save to localStorage
-                salesData.push(purchase);
-                localStorage.setItem('megaMillionsSales', JSON.stringify(salesData));
-
-                // Send email notification
-                sendEmailNotification(purchase);
-
-                closePurchaseModal();
-                showSuccessModal();
-                updateAdminDashboard();
-                
-                showMessage('Compra aprovada! Bilhetes serão enviados em breve.', 'success');
-
-            } catch (error) {
-                showMessage('Erro no processamento. Tente novamente.', 'error');
-            }
-        }
 
         function showSuccessModal() {
             document.getElementById('successModal').classList.remove('hidden');
@@ -1833,20 +1648,7 @@
             document.getElementById('successModal').classList.remove('flex');
         }
 
-        // Financial section
-        function showCardForm() {
-            document.getElementById('cardForm').classList.remove('hidden');
-        }
-
-        function hideCardForm() {
-            document.getElementById('cardForm').classList.add('hidden');
-        }
-
-        function saveCard(event) {
-            event.preventDefault();
-            showMessage('Cartão cadastrado com sucesso!', 'success');
-            hideCardForm();
-        }
+        // Financial section - Mercado Pago only
 
         function updatePurchaseHistory() {
             const historyDiv = document.getElementById('purchaseHistory');
@@ -1962,50 +1764,7 @@
             }
         }
 
-        function processBolao(event) {
-            event.preventDefault();
-            
-            const paymentMethod = document.querySelector('input[name="bolaoPaymentMethod"]:checked');
-            if (!paymentMethod) {
-                showMessage('Selecione uma forma de pagamento', 'error');
-                return;
-            }
 
-            const cotas = document.getElementById('bolaoCotas').value;
-            if (!cotas) {
-                showMessage('Selecione a quantidade de cotas', 'error');
-                return;
-            }
-
-            const name = document.getElementById('bolaoBuyerName').value;
-            const email = document.getElementById('bolaoBuyerEmail').value;
-            const cpf = document.getElementById('bolaoBuyerCPF').value;
-
-            const total = (parseInt(cotas) * parseFloat(selectedBolao.pricePerCota.replace(',', '.'))).toFixed(2).replace('.', ',');
-
-            // Create bolão purchase record
-            const purchase = {
-                id: Date.now(),
-                date: new Date().toLocaleDateString('pt-BR'),
-                name: name,
-                email: email,
-                cpf: cpf,
-                type: 'Bolão',
-                tickets: selectedBolao.tickets,
-                cotas: cotas,
-                price: total,
-                paymentMethod: paymentMethod.value,
-                status: 'Confirmado'
-            };
-
-            // Save to localStorage
-            salesData.push(purchase);
-            localStorage.setItem('megaMillionsSales', JSON.stringify(salesData));
-
-            closeBolaoModal();
-            showSuccessModal();
-            updateAdminDashboard();
-        }
 
         // Contact form
         function sendMessage(event) {
@@ -2109,5 +1868,8 @@
             setInterval(updatePrizeAmount, 120000);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98eb9340a769cb06',t:'MTc2MDQ5MjA3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ebecde9637e012',t:'MTc2MDQ5NTc0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
+  
+          
